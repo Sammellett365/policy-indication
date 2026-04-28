@@ -1,3 +1,1453 @@
-<!DOCTYPE html><html lang="en"><head>    <meta charset="UTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>Latitudes Crew - Crew Health Insurance Indication</title>    <style>        :root {            --primary-red: #FF0000;            --pink-bg: #F9E5E7;            --text-dark: #000000;            --text-light: #718096;            --title-text: #FFFFFF;            --border-thin: 1px solid #FF0000;        }        * { margin: 0; padding: 0; box-sizing: border-box; }        @page { margin: 0; size: A4; }        body { font-family: 'Nexa', Arial, Helvetica, sans-serif; font-size: 10pt; line-height: 1.3; color: #000; background: #f5f5f5; }        /* Container - Responsive */        .container {            max-width: 900px;            margin: 0 auto;            padding: 15px;        }        /* Main Tabs Navigation */        .main-tabs {            display: flex;            gap: 5px;            margin-bottom: 15px;            border-bottom: 2px solid var(--primary-red);            padding-bottom: 0;        }        .main-tab {            padding: 8px 20px;            background: #fff;            border: 1px solid #ddd;            border-bottom: none;            border-radius: 5px 5px 0 0;            cursor: pointer;            font-family: 'Nexa', Arial, sans-serif;            font-size: 10pt;            font-weight: 500;            color: #666;            transition: all 0.2s ease;        }        .main-tab:hover {            background: #f9f9f9;        }        .main-tab.active {            background: var(--primary-red);            color: #fff;            border-color: var(--primary-red);        }        .main-tab-content {            display: none;        }        .main-tab-content.active {            display: block;        }        /* Quote Options Tabs */        .options-tabs {            display: flex;            gap: 10px;            margin-bottom: 15px;        }        .option-tab {            padding: 10px 20px;            border: 1px solid var(--primary-red);            background: #fff;            color: var(--primary-red);            cursor: pointer;            font-family: 'Nexa', Arial, sans-serif;            font-size: 10pt;            font-weight: 500;            border-radius: 4px;            transition: all 0.2s ease;        }        .option-tab:hover {            background: #fff5f5;        }        .option-tab.active {            background: var(--primary-red);            color: #fff;        }        .option-tab .price {            font-family: 'Calibri', Arial, sans-serif;            font-size: 12pt;            font-weight: 600;            display: block;            margin-top: 3px;        }        .option-content {            display: none;        }        .option-content.active {            display: block;        }        /* Indication Sheet */        .indication-sheet {            background: #fff;            padding: 20px;            margin-bottom: 15px;        }        /* Page Header */        .page-header {            display: flex;            justify-content: space-between;            align-items: center;            margin-bottom: 10px;        }        .page-header-title {            font-family: 'Choplin Medium-DEMO', 'Nexa', 'Calibri', 'Arial', sans-serif;            font-size: 26pt;            font-weight: 500;            color: #FF0000;            text-transform: uppercase;        }        .page-header-logo {            height: 2.29cm;            width: 2.6cm;            object-fit: contain;        }        /* Document Title */        .document-title {            font-size: 16pt;            font-weight: 500;            color: #fff;            text-align: center;            margin: 0 0 15px 0;            background: var(--primary-red);            padding: 5px 3px;            height: 27.6px;            display: flex;            align-items: center;            justify-content: center;        }        /* Benefit Section */        .benefit-section {            padding: 2px 0 3px 0;            margin: 0;            background: #fff;        }        .benefit-section + .benefit-section {            margin-top: 3px;        }        .benefit-header {            background-color: #fff;            color: #FF0000;            font-size: 12pt;            font-weight: 500;            padding: 0 0 0 3px;            border-bottom: var(--border-thin);            border-left: var(--border-thin);            display: flex;            justify-content: space-between;            align-items: baseline;            gap: 12px;            margin-bottom: 3px;            line-height: 1;            cursor: pointer;        }        .benefit-header:hover {            background: #fafafa;        }        .benefit-header .arrow {            font-size: 10px;            color: #999;            margin-right: 5px;            transition: transform 0.2s ease;        }        .benefit-header.collapsed .arrow {            transform: rotate(-90deg);        }        .benefit-title {            color: #FF0000;            font-size: 12pt;        }        .benefit-eligibility {            text-align: right;            font-weight: 500;        }        .benefit-body {            max-height: 1000px;            overflow: hidden;            transition: max-height 0.3s ease;        }        .benefit-body.collapsed {            max-height: 0;        }        /* Indication Table */        .indication-table {            width: 100%;            border-collapse: separate;            border-spacing: 0.75mm;            background: #fff;            margin: 0;            font-size: 10pt;        }        .td-left {            width: 35%;            padding: 1.5px;            font-weight: 300;            font-size: 11pt;            color: var(--text-dark);            background: #fff;            text-align: left;            vertical-align: middle;        }        .td-right {            width: 65%;            padding: 1.5px 1.5px 1.5px 4px;            font-family: 'Calibri', Arial, sans-serif !important;            font-size: 11pt !important;            background-color: var(--pink-bg);            color: var(--text-dark);            vertical-align: middle;            line-height: 1;        }        /* Disability Table */        .disability-section {            margin: 0;            padding: 0;        }        .disability-table {            width: 100%;            border-collapse: separate;            border-spacing: 0.75mm;            background: #fff;            margin: 0;            font-size: 10pt;        }        .disability-table th, .disability-table td {            padding: 0;            vertical-align: middle;            color: #000;            background: #fff;            border: none;            line-height: 1.3;        }        .disability-table thead th {            color: #FF0000;            font-weight: 600;            text-align: center;        }        .disability-rail {            background: #fff;            text-align: center;            font-weight: 600;            color: #FF0000 !important;            padding: 0;            border-right: 1px solid #FF0000 !important;            vertical-align: middle;            line-height: 1;        }        .disability-rail-spacer {            background: #fff;            border-top: 1px solid #FF0000 !important;            border-bottom: 1px solid #FF0000 !important;            width: 1%;            padding: 0;        }        .disability-rail-empty {            background: #fff;            border: none;        }        .disability-table .benefit-name {            font-weight: 300;            font-size: 11pt;            color: var(--text-dark);        }        .disability-table .benefit-value {            background: var(--pink-bg);            font-family: 'Calibri', Arial, sans-serif !important;            font-size: 11pt !important;            padding: 1.5px 1.5px 1.5px 4px;            vertical-align: middle;            line-height: 1;        }        /* Premium Section */        .premium-section {            margin: 15px 0 0 0;            background: #fff;        }        .premium-subtitle {            background: #fff;            color: #FF0000;            font-size: 11pt;            font-weight: 700;            padding: 2px 3px;        }        .premium-table {            width: 100%;            border-collapse: separate;            border-spacing: 0.75mm;            background: #fff;            margin: 0;            font-size: 10pt;        }        .premium-table th, .premium-table td {            padding: 1.5px;            vertical-align: middle;            color: #000;            background: #fff;            line-height: 1;        }        .premium-table thead th {            color: var(--text-dark);            font-weight: 600;            text-align: center;        }        .premium-table .premium-label {            font-weight: 500;            font-size: 11pt;        }        .premium-table .premium-rate,        .premium-table .premium-details,        .premium-table .premium-total {            background: var(--pink-bg);            font-family: 'Calibri', Arial, sans-serif !important;            font-size: 11pt !important;            padding: 1.5px 1.5px 1.5px 4px;            text-align: right;            line-height: 1;        }        .premium-table .row-total .premium-label {            font-weight: 400;        }        .premium-table .row-total .premium-rate,        .premium-table .row-total .premium-details {            background: #fff;            font-weight: 300;            font-size: 11pt;        }        .premium-table .row-total .premium-total {            background: var(--pink-bg);            text-align: right;        }        .row-grand-total td {            font-weight: 400;        }        .row-grand-total .premium-details {            background: #fff;        }        .row-grand-total .premium-total {            background: var(--pink-bg);        }        /* Detail Section */        .detail-subtitle {            background: var(--primary-red);            color: var(--title-text);            font-family: 'Choplin Medium', 'Nexa', Arial, sans-serif;            font-size: 12pt;            font-weight: 500;            padding: 3px;            display: block;            width: 100%;            cursor: pointer;        }        .detail-subtitle:hover {            background: #dd0000;        }        .detail-subtitle .arrow {            float: right;            font-size: 10px;            transition: transform 0.2s ease;        }        .detail-subtitle.collapsed .arrow {            transform: rotate(-90deg);        }        .detail-body {            background: #fff;            color: #000;            font-size: 10pt;            line-height: 1.4;            padding: 2px 2px 4px 2px;            max-height: 1000px;            overflow: hidden;            transition: max-height 0.3s ease;        }        .detail-body.collapsed {            max-height: 0;            padding: 0 2px;        }        .detail-body ul {            margin: 6px 0 0 18px;            padding: 0;        }        .detail-body li {            margin: 4px 0;        }        /* Census Table */        .census-section {            margin: 10px 0 0 0;            background: #fff;        }        .census-table {            width: 100%;            border-collapse: separate;            border-spacing: 0.75mm;            background: #fff;            font-size: 10pt;        }        .census-table th, .census-table td {            border: 1px white;            padding: 1.5px;            vertical-align: middle;            color: #000;            background: #fff;            line-height: 1;        }        .census-table thead th {            color: #FF0000;            font-weight: 700;            text-align: left;        }        .census-table tbody td {            background: var(--pink-bg);            font-family: 'Calibri', Arial, sans-serif !important;            font-size: 11pt !important;            padding: 1.5px 1.5px 1.5px 4px;            line-height: 1;        }        .census-table tbody tr:nth-child(odd) td {            background: #f7dfe2;        }        /* Differences Table */        .differences-note {            font-size: 9pt;            color: #333;            padding: 8px 4px;            line-height: 1.4;        }        /* Footer */        .footer-text {            font-family: 'Century Gothic', sans-serif;            font-size: 7pt;            color: #666;            line-height: 1.3;            margin-top: 20px;            padding: 10px;            background: #fff;        }        /* Action Buttons */        .action-buttons {            text-align: center;            padding: 15px;            background: #fff;            margin-top: 15px;        }        .btn {            display: inline-block;            padding: 8px 20px;            border-radius: 4px;            font-family: 'Nexa', Arial, sans-serif;            font-size: 10pt;            font-weight: 500;            text-decoration: none;            cursor: pointer;            margin: 3px;            transition: all 0.2s ease;            border: none;        }        .btn-primary {            background: var(--primary-red);            color: white;        }        .btn-primary:hover {            background: #cc0000;        }        .btn-secondary {            background: white;            color: var(--primary-red);            border: 1px solid var(--primary-red);        }        .btn-secondary:hover {            background: #fff5f5;        }        /* Responsive */        @media (max-width: 768px) {            .container { padding: 10px; }            .page-header-title { font-size: 20pt; }            .main-tabs { flex-wrap: wrap; }            .main-tab { padding: 6px 12px; font-size: 9pt; }            .options-tabs { flex-wrap: wrap; }            .option-tab { flex: 1; min-width: 120px; }            .indication-table, .premium-table, .census-table { font-size: 9pt; }            .td-left, .td-right { font-size: 10pt !important; }        }        /* Print */        @media print {            body { background: #fff; }            .main-tabs, .options-tabs, .action-buttons { display: none; }            .main-tab-content, .option-content { display: block !important; }            .benefit-body, .detail-body { max-height: none !important; }            .container { max-width: 100%; padding: 0; }        }    </style></head><body><div class="container">    <!-- MAIN TABS -->    <div class="main-tabs">        <button class="main-tab active" onclick="showMainTab('quote', this)">Quote</button>        <button class="main-tab" onclick="showMainTab('census', this)">Crew Census</button>                <button class="main-tab" onclick="showMainTab('details', this)">Details</button>    </div>    <!-- ============================================ -->    <!-- QUOTE TAB -->    <!-- ============================================ -->    <div class="main-tab-content active" id="tab-quote">        <!-- Quote Option Tabs -->        <div class="options-tabs">            <div class="option-tab active" onclick="showOption(1, this)">                Main Quote                <span class="price">158,830.00</span>            </div>                        <div class="option-tab" onclick="showOption(2, this)">                Option 2                <span class="price">201,570.00</span>            </div>                    </div>        <!-- OPTION 1 CONTENT -->        <div class="option-content active" id="option-1">            <div class="indication-sheet">                <!-- Header -->                <div class="page-header">                    <span class="page-header-title">LATITUDES</span>                </div>                <div class="document-title">CREW HEALTH INSURANCE INDICATION</div>                <!-- GENERAL -->                <section class="benefit-section">                    <header class="benefit-header" onclick="toggleBenefit(this)">                        <span class="benefit-title">GENERAL</span>                        <span class="arrow">▼</span>                    </header>                    <div class="benefit-body">                        <table class="indication-table">                            <tr><td class="td-left">Vessel / Policyholder Details:</td><td class="td-right">Golden Odyssey - Hill Robinson</td></tr>                            <tr><td class="td-left">Geographic Area:</td><td class="td-right">Worldwide excluding US/Canada</td></tr>                            <tr><td class="td-left">North America Itinerary:</td><td class="td-right">None</td></tr>                            <tr><td class="td-left">Number of Crew:</td><td class="td-right">62 permanent; 0 slots of seasonal</td></tr>                            <tr><td class="td-left">Currency:</td><td class="td-right">EUR</td></tr>                            <tr><td class="td-left">Period of Cover:</td><td class="td-right">12 months from 29 Jan 2026</td></tr>                            <tr><td class="td-left">Quote Valid:</td><td class="td-right">30 days from 29 Jan 2026</td></tr>                        </table>                    </div>                </section>                <!-- MEDICAL EXPENSES -->                                <section class="benefit-section">                    <header class="benefit-header" onclick="toggleBenefit(this)">                        <span class="benefit-title">MEDICAL EXPENSES</span>                        <span class="benefit-eligibility">Eligibility: All Crew <span class="arrow">▼</span></span>                    </header>                    <div class="benefit-body">                        <table class="indication-table">                            <tr><td class="td-left">Limit Per Person, Per Claim:</td><td class="td-right">EUR 1,000,000</td></tr>                            <tr><td class="td-left">Deductible:</td><td class="td-right">EUR 150</td></tr>                        </table>                    </div>                </section>                                <!-- HOSPITAL DAILY INDEMNITY -->                                <!-- WELLNESS -->                                <!-- HEALTHPLUS -->                                <section class="benefit-section">                    <header class="benefit-header" onclick="toggleBenefit(this)">                        <span class="benefit-title">HEALTHPLUS</span>                        <span class="benefit-eligibility">Eligibility: All Crew <span class="arrow">▼</span></span>                    </header>                    <div class="benefit-body">                        <table class="indication-table">                            <tr><td class="td-left">Routine Medical, Dental, Optical:</td><td class="td-right">Annual maximum limit EUR 3,000 </td></tr>                            <tr><td class="td-left" colspan="2" style="background: #fff;">Dental treatment required as a result of accident is covered under the Medical Expenses benefit.</td></tr>                        </table>                    </div>                </section>                                <!-- DENTAL -->                                <!-- DISABILITY & DEATH -->                <section class="benefit-section">                    <header class="benefit-header" onclick="toggleBenefit(this)">                        <span class="benefit-title">DISABILITY &amp; DEATH</span>                        <span class="benefit-eligibility">Eligibility: As Detailed Below <span class="arrow">▼</span></span>                    </header>                    <div class="benefit-body">                        <div class="disability-section">                            <table class="disability-table">                                <colgroup>                                    <col style="width: 10%;"><col style="width: 1%;"><col style="width: 24%;"><col style="width: 32.5%;"><col style="width: 32.5%;">                                </colgroup>                                <thead><tr><th></th><th></th><th></th><th>Accident</th><th>Illness</th></tr></thead>                                <tbody>                                    <tr><th class="disability-rail" rowspan="5">Disability<br/>Benefits:</th><td class="disability-rail-spacer" rowspan="5"></td><td class="benefit-name">Temporary Total Disability 1:</td><td class="benefit-value" colspan="2">Benefit period of 16 weeks; 100% of salary; 7 day waiting period</td></tr>                                                                        <tr><td class="benefit-name">Permanent Total Disability:</td><td class="benefit-value">3 x 100% of basic annual salary </td><td class="benefit-value">*Available on request</td></tr>                                    <tr><td class="benefit-name">Permanent Partial Disability:</td><td class="benefit-value">A proportion of the above sum depending upon the severity of the injury</td><td class="benefit-value">N/A</td></tr>                                </tbody>                            </table>                            <table class="disability-table" style="margin-top: 0;">                                <colgroup>                                    <col style="width: 10%;"><col style="width: 1%;"><col style="width: 24%;"><col style="width: 32.5%;"><col style="width: 32.5%;">                                </colgroup>                                <tbody>                                    <tr><td class="disability-rail-empty"></td><td class="disability-rail-empty"></td><td class="benefit-name">Death:</td><td class="benefit-value">3 x 100% of basic annual salary </td><td class="benefit-value">Available on request</td></tr>                                    <tr><td class="disability-rail-empty"></td><td class="disability-rail-empty"></td><td class="benefit-name"></td><td colspan="2" style="background: #fff; text-align: right;">Limited cover included as standard - refer to policy summary</td></tr>                                </tbody>                            </table>                        </div>                    </div>                </section>                <!-- PERSONAL LIABILITY -->                                <!-- PREMIUM BREAKDOWN -->                <section class="premium-section">                    <div class="detail-subtitle" onclick="toggleDetail(this)">PREMIUM BREAKDOWN <span class="arrow">▼</span></div>                    <div class="detail-body">                        <table class="premium-table" style="width: 100%; table-layout: fixed;">                            <colgroup><col style="width: 260px;"><col style="width: 80px;"><col style="width: 80px;"><col style="width: auto;"><col style="width: 110px;"></colgroup>                            <thead><tr><th class="premium-subtitle" style="text-align: left; color: #FF0000;">CREW</th><th colspan="2" style="text-align: left; font-weight: 400;">Annual Rate (EUR)</th><th style="text-align: left; font-weight: 400;">Details</th><th style="text-align: left; font-weight: 400;">Total (EUR)</th></tr></thead>                            <tbody>                                <tr><td class="premium-label">Medical Expenses (non-US/Can):</td><td class="premium-rate" colspan="2">1,110.00</td><td class="premium-details">62 crew</td><td class="premium-total">68,820.00</td></tr><tr><td class="premium-label">USA/Canada up-charge†:</td><td class="premium-rate" colspan="2">1,545.00</td><td class="premium-details">62crew / 0 days</td><td class="premium-total">0.00</td></tr><tr><td class="premium-label">Medical Expenses (US/Can):</td><td class="premium-rate" colspan="2">2,655.00</td><td class="premium-details">0 crew</td><td class="premium-total">0.00</td></tr><tr><td class="premium-label">Health Plus</td><td class="premium-rate" colspan="2">395.00</td><td class="premium-details">62 crew</td><td class="premium-total">24,490.00</td></tr><tr><td class="premium-label">Disability & Acc. Death (1):</td><td class="premium-rate" colspan="2">1.04%</td><td class="premium-details">Wageroll: EUR6,300,000.0</td><td class="premium-total">65,520.00</td></tr>                                <tr class="row-total"><td class="premium-label">Total:</td><td class="premium-rate"></td><td class="premium-rate"></td><td class="premium-details" style="text-align: right; font-family: 'Nexa', sans-serif !important;">(EUR)</td><td class="premium-total">158,830.00</td></tr>                                                                <tr class="row-grand-total"><td class="premium-label" style="font-weight: 400;">GRAND TOTAL</td><td style="background: #fff;"></td><td style="background: #fff;"></td><td style="background: #fff; text-align: right; font-family: 'Nexa', sans-serif !important;">(EUR)</td><td class="premium-total" style="text-align: right;">158,830.00</td></tr>                            </tbody>                        </table>                        <div style="font-size:9pt;color:var(--text-light);margin-top:6px;">N. America residents must have USA/Canada cover year-round. All others can upgrade as needed: 
-Pro Rata Load = annual base x (days needed / 365). 
-We strongly recommend upgrading cover not only when the yacht is in US waters, but when the yacht or crew member is in an area (e.g. the Caribbean) where an illness or injury could result in treatment in a US facility.</div>                    </div>                </section>            </div>        </div>        <!-- OPTION 2 CONTENT -->                <div class="option-content" id="option-2">            <div class="indication-sheet">                <div class="page-header">                    <span class="page-header-title">LATITUDES</span>                </div>                <div class="document-title">CREW HEALTH INSURANCE INDICATION - OPTION 2</div>                <!-- Key Differences -->                <section class="premium-section">                    <div class="detail-subtitle">KEY DIFFERENCES FROM MAIN QUOTE</div>                    <div class="differences-note">                        The table below shows how Option 2 differs from the Main Quote. All other benefits and terms remain the same.                    </div>                    <table class="premium-table" style="width: 100%;">                        <thead>                            <tr>                                <th style="text-align: left; padding: 1.5px; background: #fff;"></th>                                <th style="text-align: left; padding: 1.5px; background: #fff; font-weight: 400; font-size: 11pt;">Option 2</th>                                <th style="text-align: left; padding: 1.5px; background: #fff; font-weight: 400; font-size: 11pt;">Main Quote</th>                            </tr>                        </thead>                        <tbody>                                                        <tr>                                <td class="premium-label">Medical - Deductible</td>                                <td class="premium-total" style="text-align: right;">80</td>                                <td class="premium-total" style="text-align: right;">200</td>                            </tr>                                                        <tr>                                <td class="premium-label">TTD (Sick wages in respect of accident and illness) - Benefit Period</td>                                <td class="premium-total" style="text-align: right;">52/52</td>                                <td class="premium-total" style="text-align: right;">16/16</td>                            </tr>                                                        <tr>                                <td colspan="3" style="background: #fff; height: 8px;"></td>                            </tr>                            <tr>                                <td class="premium-label" style="font-weight: 600;">Total Premium (EUR)</td>                                <td class="premium-total" style="text-align: right; font-weight: 600;">201,570.00</td>                                <td class="premium-total" style="text-align: right; font-weight: 600;">158,830.00</td>                            </tr>                        </tbody>                    </table>                </section>            </div>        </div>            </div>    <!-- ============================================ -->    <!-- CREW CENSUS TAB -->    <!-- ============================================ -->    <div class="main-tab-content" id="tab-census">        <div class="indication-sheet">            <div class="detail-subtitle">CREW CENSUS</div>            <section class="census-section">                <table class="census-table">                    <thead>                        <tr>                            <th>Last Name</th>                            <th>First Name</th>                            <th>DOB</th>                            <th>Nationality</th>                            <th>Position</th>                        </tr>                    </thead>                    <tbody>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>13-Sep-1979</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>17-May-1999</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>17-Sep-2002</td>                            <td>FRA</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>25-Jan-1992</td>                            <td>ITA</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>28-Jun-2005</td>                            <td>ITA</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>28-Jul-1982</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>17-Oct-2000</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>01-May-1971</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>17-Jan-1974</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>26-Jul-1984</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>15-Aug-1994</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>10-Jan-1990</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>16-May-1992</td>                            <td>PHL</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>24-Aug-2003</td>                            <td>BEL</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>20-Apr-1999</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>11-Dec-1972</td>                            <td>BEL</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>29-Jul-1997</td>                            <td>NLD</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>09-Sep-1999</td>                            <td>NOR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>10-Jan-1990</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>16-May-1992</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>24-Aug-2003</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>20-Apr-1999</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>11-Dec-1972</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>29-Jul-1997</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>09-Sep-1999</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>10-Jan-1990</td>                            <td>PHL</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>16-May-1992</td>                            <td>BEL</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>24-Aug-2003</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>20-Apr-1999</td>                            <td>BEL</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>11-Dec-1972</td>                            <td>NLD</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>29-Jul-1997</td>                            <td>NOR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>09-Sep-1999</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>10-Jan-1990</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>16-May-1992</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>24-Aug-2003</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>20-Apr-1999</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>11-Dec-1972</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>29-Jul-1997</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>09-Sep-1999</td>                            <td>PHL</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>10-Jan-1990</td>                            <td>BEL</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>16-May-1992</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>24-Aug-2003</td>                            <td>BEL</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>20-Apr-1999</td>                            <td>NLD</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>11-Dec-1972</td>                            <td>NOR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>29-Jul-1997</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>09-Sep-1999</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>10-Jan-1990</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>16-May-1992</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>24-Aug-2003</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>20-Apr-1999</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>11-Dec-1972</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>29-Jul-1997</td>                            <td>PHL</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>09-Sep-1999</td>                            <td>BEL</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>10-Jan-1990</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>16-May-1992</td>                            <td>BEL</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>24-Aug-2003</td>                            <td>NLD</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>20-Apr-1999</td>                            <td>NOR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>11-Dec-1972</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>29-Jul-1997</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>09-Sep-1999</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>10-Jan-1990</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                                <tr>                            <td>Est</td>                            <td>Est</td>                            <td>16-May-1992</td>                            <td>GBR</td>                            <td>Permanent</td>                        </tr>                                            </tbody>                </table>            </section>        </div>    </div>    <!-- ============================================ -->    <!-- DEPENDANTS TAB -->    <!-- ============================================ -->        <!-- ============================================ -->    <!-- DETAILS TAB -->    <!-- ============================================ -->    <div class="main-tab-content" id="tab-details">        <div class="indication-sheet">            <div class="detail-subtitle" onclick="toggleDetail(this)">DETAILS <span class="arrow">▼</span></div>            <div class="detail-body">All benefits are underwritten by certain Underwriters at Lloyd’s of London</div>                        <div class="detail-subtitle" onclick="toggleDetail(this)">Tailoring your policy. <span class="arrow">▼</span></div>            <div class="detail-body">The Latitudes Crew program includes various components which can be combined as desired. At a minimum, the policy must include Medical or Disability & Accidental Death cover. The Health Plus benefit (routine/preventive check-ups, dental care and optical services and supplies) Death due to Illness and Hospital Daily Indemnity are all available as optional extras. The Disability & Accidental Death cover can be structured in various ways, including or excluding cover for loss of wages or permanent disablement due to illness.</div>                        <div class="detail-subtitle" onclick="toggleDetail(this)">Premium Payment <span class="arrow">▼</span></div>            <div class="detail-body">Premium payments are annual, with crew changes adjusted at expiry on a pro‑rata basis.</div>            <div class="detail-subtitle" onclick="toggleDetail(this)">Administration of Crew Changes <span class="arrow">▼</span></div>            <div class="detail-body">Provided a crew complement of at least three is maintained, new hires should be notified to us by e-mail to include name, date of birth, nationality, position, salary and start date. If the crew complement starts out below three, individual forms would be required. Upon receipt of the notification of new crew, we provide an individual Declaration of Insurance (PDF) for the new member which includes confirmation of the cover and the numbers to call in the event of a claim. For departing crew, an e-mail confirming the name of the crew member and the date the coverage should terminate is sufficient. We will be happy to assist with individual plans where needed.</div>            <div class="detail-subtitle" onclick="toggleDetail(this)">Claim Payments <span class="arrow">▼</span></div>            <div class="detail-body">Claim payments can be made directly to the medical provider (subject to their agreement), to the employer or to the crew member, as desired. Claims handling, Emergency Assistance and US cost containment is provided by Global Medical Management, Inc. in Florida, a Europ Assistance company, supported by MHG's staff in the Isle of Man, Fort Lauderdale and Hamburg.</div>            <div class="detail-subtitle" onclick="toggleDetail(this)">Subjectivities <span class="arrow">▼</span></div>            <div class="detail-body">                <ul>                    <li>Name and address of the Assured in a territory in which Lloyd's is licensed</li>                    <li>A satisfactory group Declaration of Health</li>                    <li>Confirmation of the desired effective date</li>                    <li>Confirmation of the desired benefits</li>                    <li>A complete, current crew list including names, dates of birth, nationalities, positions and salaries</li>                </ul>            </div>        </div>    </div>    <!-- FOOTER -->    <div class="footer-text">        MHG Ocean Benefits Limited, trading as MHG Ocean Benefits, MHG Insurance and MHG Underwriting Services, is registered with the Isle of Man Financial Services Authority as an insurance intermediary in respect of General Business. Registered in the Isle of Man, company number: 120885C.    </div>    <!-- ACTION BUTTONS -->    <div class="action-buttons">        <a href="mailto:quotes@yourcompany.com?subject=Quote Query - Golden Odyssey" class="btn btn-primary">Contact Us</a>        <button onclick="window.print()" class="btn btn-secondary">Print</button>    </div></div><script>    function showMainTab(tabName, btn) {        document.querySelectorAll('.main-tab-content').forEach(function(el) {            el.classList.remove('active');        });        document.querySelectorAll('.main-tab').forEach(function(el) {            el.classList.remove('active');        });        document.getElementById('tab-' + tabName).classList.add('active');        btn.classList.add('active');    }    function showOption(num, btn) {        document.querySelectorAll('.option-content').forEach(function(el) {            el.classList.remove('active');            el.style.display = 'none';        });        document.querySelectorAll('.option-tab').forEach(function(el) {            el.classList.remove('active');        });        var opt = document.getElementById('option-' + num);        if (opt) {            opt.classList.add('active');            opt.style.display = 'block';        }        btn.classList.add('active');    }    function toggleBenefit(header) {        header.classList.toggle('collapsed');        var body = header.nextElementSibling;        body.classList.toggle('collapsed');    }    function toggleDetail(title) {        title.classList.toggle('collapsed');        var body = title.nextElementSibling;        body.classList.toggle('collapsed');    }</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASM — Renewal Analytics Portal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f8f7f3;
+  --bg-alt: #eeede7;
+  --card: #ffffff;
+  --ink: #0f0f0e;
+  --ink-2: #2a2a28;
+  --muted: #6e6d68;
+  --muted-2: #9a9993;
+  --border: #e0dfd7;
+  --border-strong: #c9c7bd;
+  --accent: #0a3d4f;
+  --accent-2: #145b72;
+  --nlr-red: #b52b20;
+  --nlr-red-bg: #f7e5e2;
+  --nlr-amber: #b57d00;
+  --nlr-amber-bg: #f7ecd1;
+  --nlr-green: #2d6e4a;
+  --nlr-green-bg: #e1ede4;
+  --chart-1: #0a3d4f;
+  --chart-2: #5b9ba5;
+  --chart-3: #c98a4b;
+  --chart-4: #8a6fb5;
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Geist', sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mono { font-family: 'JetBrains Mono', monospace; font-feature-settings: "tnum"; }
+.serif { font-family: 'Fraunces', serif; font-optical-sizing: auto; }
+
+/* ============ Header ============ */
+.topbar {
+  background: var(--ink);
+  color: #e8e7e1;
+  padding: 10px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+.topbar .brand { display: flex; align-items: center; gap: 10px; }
+.topbar .brand-mark {
+  width: 22px; height: 22px;
+  border: 1.5px solid #e8e7e1;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif; font-weight: 600; font-size: 13px;
+}
+.topbar .brand-text { font-family: 'Fraunces', serif; font-size: 14px; letter-spacing: 0.03em; }
+.topbar nav { display: flex; gap: 28px; }
+.topbar nav a {
+  color: #b8b7b1;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+.topbar nav a.active { color: #fff; border-bottom-color: #fff; }
+.topbar .user { display: flex; align-items: center; gap: 12px; }
+.topbar .user-badge {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: #c98a4b; color: #0f0f0e;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: 11px;
+}
+
+/* ============ Breadcrumb / Context bar ============ */
+.context-bar {
+  background: var(--bg);
+  padding: 18px 32px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+.client-header h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 36px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.client-header h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+.client-header .sub {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.filters { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.filter-group { display: flex; align-items: center; gap: 6px; }
+.filter-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-right: 4px;
+}
+.pill-group { display: flex; background: var(--card); border: 1px solid var(--border); border-radius: 2px; }
+.pill {
+  padding: 6px 12px;
+  font-size: 12px;
+  color: var(--ink-2);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  border-right: 1px solid var(--border);
+  transition: all 0.15s;
+}
+.pill:last-child { border-right: none; }
+.pill:hover { background: var(--bg-alt); }
+.pill.active { background: var(--ink); color: #fff; }
+
+.select-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  font-size: 12px;
+  font-family: inherit;
+  color: var(--ink-2);
+  cursor: pointer;
+  border-radius: 2px;
+  min-width: 80px;
+}
+
+/* ============ Main layout ============ */
+main { padding: 24px 32px 60px; max-width: 1500px; margin: 0 auto; }
+
+/* ============ KPI strip ============ */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+.kpi {
+  background: var(--card);
+  padding: 18px 20px 18px;
+  position: relative;
+}
+.kpi-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.kpi-value {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.kpi-value .unit {
+  font-size: 14px;
+  color: var(--muted);
+  margin-left: 4px;
+  font-family: 'Geist', sans-serif;
+}
+.kpi-delta {
+  margin-top: 8px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
+}
+.kpi-delta .up { color: var(--nlr-red); }
+.kpi-delta .down { color: var(--nlr-green); }
+
+/* ============ Section ============ */
+.section { margin-bottom: 44px; }
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+}
+.section-head h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+.section-head .note {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+
+.grid-2 { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: 20px;
+}
+.card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+.card-sub {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.card-controls { display: flex; gap: 4px; }
+.mini-pill {
+  padding: 3px 8px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--muted);
+  font-family: inherit;
+  border-radius: 2px;
+}
+.mini-pill.active { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* ============ Chart container ============ */
+.chart-wrap { position: relative; }
+svg .grid-line { stroke: var(--border); stroke-width: 0.5; }
+svg .axis-label { fill: var(--muted); font-size: 10px; font-family: 'JetBrains Mono', monospace; }
+svg .bar { transition: opacity 0.15s; cursor: pointer; }
+svg .bar:hover { opacity: 0.7; }
+svg .threshold { stroke: var(--nlr-red); stroke-width: 1; stroke-dasharray: 3,3; }
+svg .threshold-label { fill: var(--nlr-red); font-size: 10px; font-family: 'JetBrains Mono', monospace; }
+
+/* ============ NLR Heatmap table ============ */
+.vessel-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.vessel-table thead th {
+  text-align: left;
+  padding: 10px 8px;
+  font-weight: 500;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border-strong);
+  background: var(--bg);
+  cursor: pointer;
+  user-select: none;
+}
+.vessel-table thead th .sort-arrow { opacity: 0.3; margin-left: 3px; }
+.vessel-table thead th.sorted .sort-arrow { opacity: 1; color: var(--accent); }
+.vessel-table thead th:hover { color: var(--ink); }
+.vessel-table tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; cursor: pointer; }
+.vessel-table tbody tr:hover { background: var(--bg); }
+.vessel-table tbody td { padding: 12px 8px; vertical-align: middle; }
+.vessel-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: -0.005em;
+}
+.heat-cell {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-align: center;
+  padding: 6px 4px !important;
+  border-left: 1px solid var(--border);
+  position: relative;
+  min-width: 56px;
+}
+.heat-cell::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  background: var(--heat-color, transparent);
+  z-index: 0;
+  border-radius: 2px;
+}
+.heat-cell span { position: relative; z-index: 1; }
+.heat-cell.empty { color: var(--muted-2); }
+.heat-cell.empty::before { display: none; }
+
+.nlr-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+}
+.nlr-chip.good { background: var(--nlr-green-bg); color: var(--nlr-green); }
+.nlr-chip.mid { background: var(--nlr-amber-bg); color: var(--nlr-amber); }
+.nlr-chip.bad { background: var(--nlr-red-bg); color: var(--nlr-red); }
+
+/* ============ Tooltip ============ */
+.tooltip {
+  position: absolute;
+  background: var(--ink);
+  color: #f8f7f3;
+  padding: 8px 12px;
+  border-radius: 2px;
+  font-size: 11px;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+  transition: opacity 0.1s;
+  min-width: 150px;
+  font-family: 'Geist', sans-serif;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.tooltip.show { opacity: 1; }
+.tooltip .t-title {
+  font-family: 'Fraunces', serif;
+  font-size: 13px;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #3a3a38;
+}
+.tooltip .t-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+}
+.tooltip .t-row .t-label { color: #b8b7b1; }
+
+/* ============ Modal / Vessel detail drawer ============ */
+.drawer-overlay {
+  position: fixed; inset: 0;
+  background: rgba(15, 15, 14, 0.35);
+  backdrop-filter: blur(2px);
+  z-index: 200;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s;
+}
+.drawer-overlay.show { opacity: 1; pointer-events: all; }
+.drawer {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: min(640px, 90vw);
+  background: var(--bg);
+  z-index: 201;
+  transform: translateX(100%);
+  transition: transform 0.3s cubic-bezier(.3,.8,.3,1);
+  overflow-y: auto;
+  border-left: 1px solid var(--border-strong);
+}
+.drawer.show { transform: translateX(0); }
+.drawer-head {
+  padding: 24px 28px 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.drawer-head h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 400;
+  font-size: 28px;
+  letter-spacing: -0.01em;
+}
+.drawer-close {
+  background: none;
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--muted);
+  border-radius: 2px;
+}
+.drawer-close:hover { color: var(--ink); }
+.drawer-body { padding: 24px 28px; }
+.drawer .mini-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 24px;
+}
+.drawer .mini-stat {
+  background: var(--card);
+  padding: 12px 14px;
+}
+.drawer .mini-stat .l {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.drawer .mini-stat .v {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  margin-top: 4px;
+}
+
+/* ============ Severity chart ============ */
+.severity-year {
+  display: grid;
+  grid-template-columns: 50px 1fr 80px;
+  gap: 12px;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+.severity-year:last-child { border-bottom: none; }
+.severity-year .y-label { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
+.severity-year .y-total { text-align: right; font-family: 'JetBrains Mono', monospace; color: var(--ink); }
+.severity-bars { display: flex; gap: 1px; height: 22px; }
+.sev-seg { height: 100%; cursor: pointer; transition: opacity 0.15s; }
+.sev-seg:hover { opacity: 0.7; }
+
+/* ============ Triangle heatmap ============ */
+.triangle-grid {
+  display: grid;
+  grid-template-columns: 60px repeat(4, 1fr);
+  gap: 2px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+}
+.triangle-grid .tg-head {
+  font-size: 9px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 6px;
+  text-align: center;
+  font-family: 'Geist', sans-serif;
+}
+.triangle-grid .tg-year {
+  padding: 8px 6px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.triangle-grid .tg-cell {
+  padding: 10px 4px;
+  text-align: center;
+  border-radius: 2px;
+  color: var(--ink);
+}
+.triangle-grid .tg-cell.empty {
+  background: var(--bg-alt);
+  color: var(--muted-2);
+}
+
+/* ============ Footer ============ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 40px;
+}
+footer a { color: var(--accent); text-decoration: none; }
+
+/* ============ Utilities ============ */
+.flex { display: flex; }
+.gap-2 { gap: 8px; }
+.gap-3 { gap: 12px; }
+.hidden { display: none !important; }
+
+@media (max-width: 900px) {
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-mark">M</div>
+    <div class="brand-text">MHG · Broker Analytics</div>
+  </div>
+  <nav>
+    <a href="#">Overview</a>
+    <a href="#" class="active">Loss Experience</a>
+    <a href="#">Exposure</a>
+    <a href="#">Renewals</a>
+    <a href="#">Documents</a>
+  </nav>
+  <div class="user">
+    <span>Howden · Sam Park</span>
+    <div class="user-badge">SP</div>
+  </div>
+</div>
+
+<div class="context-bar">
+  <div class="client-header">
+    <h1><em>ASM</em> — Fleet Renewal Analytics</h1>
+    <div class="sub">Data as of 30 April 2024 · EUR · 8 vessels active · 7 policy years</div>
+  </div>
+  <div class="filters">
+    <div class="filter-group">
+      <span class="filter-label">Basis</span>
+      <div class="pill-group" id="basisToggle">
+        <button class="pill active" data-basis="net">Net</button>
+        <button class="pill" data-basis="gross">Gross</button>
+      </div>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Cover</span>
+      <div class="pill-group" id="coverToggle">
+        <button class="pill" data-cover="med">Medical</button>
+        <button class="pill" data-cover="dis">Disability</button>
+        <button class="pill active" data-cover="comb">Combined</button>
+      </div>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Years</span>
+      <select class="select-box" id="yearFrom">
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+      </select>
+      <span style="color: var(--muted);">—</span>
+      <select class="select-box" id="yearTo">
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+        <option value="2020">2020</option>
+        <option value="2021">2021</option>
+        <option value="2022">2022</option>
+        <option value="2023" selected>2023</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ============ KPI ROW ============ -->
+  <div class="kpi-row" id="kpiRow"></div>
+
+  <!-- ============ NLR TREND + VESSEL SHARE ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Loss ratio trend</h2>
+      <span class="note">Click a year to filter · Hover for detail</span>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Fleet NLR by policy year</div>
+            <div class="card-sub" id="trendSub">Combined medical &amp; disability, net</div>
+          </div>
+          <div class="card-controls">
+            <button class="mini-pill active" data-view="nlr">NLR</button>
+            <button class="mini-pill" data-view="premium">Premium</button>
+            <button class="mini-pill" data-view="claims">Claims</button>
+          </div>
+        </div>
+        <div class="chart-wrap" id="trendChart"></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Loss share by vessel</div>
+            <div class="card-sub">Latest policy year · proportion of total incurred</div>
+          </div>
+        </div>
+        <div class="chart-wrap" id="shareChart"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VESSEL TABLE / HEATMAP ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Vessel performance</h2>
+      <span class="note">Click a vessel row for detailed history</span>
+    </div>
+    <div class="card" style="padding: 0;">
+      <div style="padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+        <div class="card-sub" id="tableSub">Net loss ratio by policy year · combined cover · EUR</div>
+        <div style="display: flex; gap: 6px; align-items: center;">
+          <span style="font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em;">Scale</span>
+          <div style="display: flex; height: 14px; font-family: 'JetBrains Mono'; font-size: 9px;">
+            <div style="background: var(--nlr-green-bg); color: var(--nlr-green); padding: 0 8px; display: flex; align-items: center;">&lt; 50%</div>
+            <div style="background: #eaf0e2; padding: 0 8px; display: flex; align-items: center;">50–75%</div>
+            <div style="background: var(--nlr-amber-bg); color: var(--nlr-amber); padding: 0 8px; display: flex; align-items: center;">75–100%</div>
+            <div style="background: var(--nlr-red-bg); color: var(--nlr-red); padding: 0 8px; display: flex; align-items: center;">&gt; 100%</div>
+          </div>
+        </div>
+      </div>
+      <div style="padding: 0 20px 16px; overflow-x: auto;">
+        <table class="vessel-table" id="vesselTable"></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DEVELOPMENT TRIANGLE + SEVERITY ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Development &amp; severity</h2>
+      <span class="note">Longer-dated policy years have more developed loss picture</span>
+    </div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">NLR development triangle</div>
+            <div class="card-sub">Observed loss ratio at months from inception</div>
+          </div>
+          <div class="card-controls" id="triangleToggle">
+            <button class="mini-pill" data-tri="medical">Medical</button>
+            <button class="mini-pill" data-tri="disability">Disability</button>
+            <button class="mini-pill active" data-tri="combined">Combined</button>
+          </div>
+        </div>
+        <div id="triangleChart"></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div>
+            <div class="card-title">Top 10 medical claims per year</div>
+            <div class="card-sub">Claim-by-claim severity · active fleet only</div>
+          </div>
+        </div>
+        <div id="severityChart"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ INCIDENT FREQUENCY ============ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Incident frequency</h2>
+      <span class="note">Fully developed historic figures vs 10-month snapshot</span>
+    </div>
+    <div class="card">
+      <div class="card-head">
+        <div>
+          <div class="card-title">Claims per 100 crew</div>
+          <div class="card-sub">Comparison: 10 months vs latest position · demonstrates tail development</div>
+        </div>
+      </div>
+      <div id="incidentChart"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div>MHG Ocean Benefits Ltd · Broker Analytics Portal · Prototype</div>
+  <div>Last refreshed: 30 Apr 2024 · <a href="#">Download as Excel</a> · <a href="#">Request renewal terms</a></div>
+</footer>
+
+<div class="tooltip" id="tooltip"></div>
+
+<div class="drawer-overlay" id="drawerOverlay"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <div>
+      <h3 id="drawerTitle">Vessel</h3>
+      <div class="card-sub" id="drawerSub">—</div>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()">×</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+</div>
+
+<script>
+/* =========================================================
+   DATA — inlined for prototype (would come from API)
+========================================================= */
+const DATA = {"client": "ASM", "currency": "EUR", "as_of": "2024-04-30", "vessels": {"A+": [{"year": 2018, "med_net_expenses": 80784.16, "med_net_premium": 86018.23, "med_net_nlr": 0.9392, "med_gross_premium": 132335.74, "med_gross_glr": 0.6104, "dis_net_expenses": 70803.23, "dis_net_premium": 75787.62, "dis_net_nlr": 0.9342, "dis_gross_premium": 116596.34, "dis_gross_glr": 0.6073, "comb_net_expenses": 151587.39, "comb_net_premium": 161805.85, "comb_net_nlr": 0.9368, "comb_gross_premium": 248932.08, "comb_gross_glr": 0.609}, {"year": 2019, "med_net_expenses": 44859.07, "med_net_premium": 72569.09, "med_net_nlr": 0.6182, "med_gross_premium": 111644.76, "med_gross_glr": 0.4018, "dis_net_expenses": 40916.09, "dis_net_premium": 78162.28, "dis_net_nlr": 0.5235, "dis_gross_premium": 120249.66, "dis_gross_glr": 0.3403, "comb_net_expenses": 85775.16, "comb_net_premium": 150731.37, "comb_net_nlr": 0.5691, "comb_gross_premium": 231894.42, "comb_gross_glr": 0.3699}, {"year": 2020, "med_net_expenses": 163399.36, "med_net_premium": 88175.72, "med_net_nlr": 1.8531, "med_gross_premium": 117567.62, "med_gross_glr": 1.3898, "dis_net_expenses": 142328.22, "dis_net_premium": 87841.79, "dis_net_nlr": 1.6203, "dis_gross_premium": 117122.39, "dis_gross_glr": 1.2152, "comb_net_expenses": 305727.58, "comb_net_premium": 176017.51, "comb_net_nlr": 1.7369, "comb_gross_premium": 234690.01, "comb_gross_glr": 1.3027}, {"year": 2021, "med_net_expenses": 96924.34, "med_net_premium": 98362.93, "med_net_nlr": 0.9854, "med_gross_premium": 131150.58, "med_gross_glr": 0.739, "dis_net_expenses": 113503.03, "dis_net_premium": 97997.89, "dis_net_nlr": 1.1582, "dis_gross_premium": 130663.85, "dis_gross_glr": 0.8687, "comb_net_expenses": 210427.37, "comb_net_premium": 196360.82, "comb_net_nlr": 1.0716, "comb_gross_premium": 261814.43, "comb_gross_glr": 0.8037}, {"year": 2022, "med_net_expenses": 211441.32, "med_net_premium": 110462.16, "med_net_nlr": 1.9142, "med_gross_premium": 147282.88, "med_gross_glr": 1.4356, "dis_net_expenses": 178322.29, "dis_net_premium": 111877.31, "dis_net_nlr": 1.5939, "dis_gross_premium": 149169.75, "dis_gross_glr": 1.1954, "comb_net_expenses": 389763.61, "comb_net_premium": 222339.47, "comb_net_nlr": 1.753, "comb_gross_premium": 296452.63, "comb_gross_glr": 1.3148}, {"year": 2023, "med_net_expenses": 107007.1, "med_net_premium": 110730.14, "med_net_nlr": 0.9664, "med_gross_premium": 147640.18, "med_gross_glr": 0.7248, "dis_net_expenses": 74561.2, "dis_net_premium": 115164.7, "dis_net_nlr": 0.6474, "dis_gross_premium": 153552.94, "dis_gross_glr": 0.4856, "comb_net_expenses": 181568.3, "comb_net_premium": 225894.84, "comb_net_nlr": 0.8038, "comb_gross_premium": 301193.12, "comb_gross_glr": 0.6028}], "Alesund": [{"year": 2019, "med_net_expenses": 6353.73, "med_net_premium": 8456.9, "med_net_nlr": 0.7513, "med_gross_premium": 13010.62, "med_gross_glr": 0.4883, "dis_net_expenses": 0.0, "dis_net_premium": 11365.95, "dis_net_nlr": 0.0, "dis_gross_premium": 17486.08, "dis_gross_glr": 0.0, "comb_net_expenses": 6353.73, "comb_net_premium": 19822.85, "comb_net_nlr": 0.3205, "comb_gross_premium": 30496.7, "comb_gross_glr": 0.2083}, {"year": 2020, "med_net_expenses": 12568.95, "med_net_premium": 17942.68, "med_net_nlr": 0.7005, "med_gross_premium": 23923.57, "med_gross_glr": 0.5254, "dis_net_expenses": 2951.89, "dis_net_premium": 20179.24, "dis_net_nlr": 0.1463, "dis_gross_premium": 26905.65, "dis_gross_glr": 0.1097, "comb_net_expenses": 15520.84, "comb_net_premium": 38121.91, "comb_net_nlr": 0.4071, "comb_gross_premium": 50829.22, "comb_gross_glr": 0.3054}, {"year": 2021, "med_net_expenses": 13269.42, "med_net_premium": 21602.11, "med_net_nlr": 0.6143, "med_gross_premium": 28802.81, "med_gross_glr": 0.4607, "dis_net_expenses": 24090.13, "dis_net_premium": 24349.42, "dis_net_nlr": 0.9894, "dis_gross_premium": 32465.89, "dis_gross_glr": 0.742, "comb_net_expenses": 37359.55, "comb_net_premium": 45951.53, "comb_net_nlr": 0.813, "comb_gross_premium": 61268.7, "comb_gross_glr": 0.6098}, {"year": 2022, "med_net_expenses": 33851.91, "med_net_premium": 24158.43, "med_net_nlr": 1.4012, "med_gross_premium": 32211.24, "med_gross_glr": 1.0509, "dis_net_expenses": 25895.18, "dis_net_premium": 27496.13, "dis_net_nlr": 0.9418, "dis_gross_premium": 36661.51, "dis_gross_glr": 0.7063, "comb_net_expenses": 59747.09, "comb_net_premium": 51654.56, "comb_net_nlr": 1.1567, "comb_gross_premium": 68872.75, "comb_gross_glr": 0.8675}, {"year": 2023, "med_net_expenses": 12183.85, "med_net_premium": 24408.24, "med_net_nlr": 0.4992, "med_gross_premium": 32544.32, "med_gross_glr": 0.3744, "dis_net_expenses": 0.0, "dis_net_premium": 29223.68, "dis_net_nlr": 0.0, "dis_gross_premium": 38964.9, "dis_gross_glr": 0.0, "comb_net_expenses": 12183.85, "comb_net_premium": 53631.91, "comb_net_nlr": 0.2272, "comb_gross_premium": 71509.22, "comb_gross_glr": 0.1704}], "Azzam": [{"year": 2022, "med_net_expenses": 13537.7, "med_net_premium": 23413.05, "med_net_nlr": 0.5782, "med_gross_premium": 31217.4, "med_gross_glr": 0.4337, "dis_net_expenses": 6226.58, "dis_net_premium": 21268.38, "dis_net_nlr": 0.2928, "dis_gross_premium": 28357.84, "dis_gross_glr": 0.2196, "comb_net_expenses": 19764.28, "comb_net_premium": 44681.43, "comb_net_nlr": 0.4423, "comb_gross_premium": 59575.24, "comb_gross_glr": 0.3318}, {"year": 2023, "med_net_expenses": 9276.81, "med_net_premium": 46721.52, "med_net_nlr": 0.1986, "med_gross_premium": 62295.36, "med_gross_glr": 0.1489, "dis_net_expenses": 7196.95, "dis_net_premium": 47669.49, "dis_net_nlr": 0.151, "dis_gross_premium": 63559.32, "dis_gross_glr": 0.1132, "comb_net_expenses": 16473.76, "comb_net_premium": 94391.01, "comb_net_nlr": 0.1745, "comb_gross_premium": 125854.68, "comb_gross_glr": 0.1309}], "Jude": [{"year": 2021, "med_net_expenses": 4118.33, "med_net_premium": 2150.0, "med_net_nlr": 1.9155, "med_gross_premium": 2866.67, "med_gross_glr": 1.4366, "dis_net_expenses": 0.0, "dis_net_premium": 1647.22, "dis_net_nlr": 0.0, "dis_gross_premium": 2196.29, "dis_gross_glr": 0.0, "comb_net_expenses": 4118.33, "comb_net_premium": 3797.22, "comb_net_nlr": 1.0846, "comb_gross_premium": 5062.96, "comb_gross_glr": 0.8134}, {"year": 2022, "med_net_expenses": 6971.3, "med_net_premium": 2308.6, "med_net_nlr": 3.0197, "med_gross_premium": 3078.13, "med_gross_glr": 2.2648, "dis_net_expenses": 0.0, "dis_net_premium": 1450.31, "dis_net_nlr": 0.0, "dis_gross_premium": 1933.74, "dis_gross_glr": 0.0, "comb_net_expenses": 6971.3, "comb_net_premium": 3758.9, "comb_net_nlr": 1.8546, "comb_gross_premium": 5011.87, "comb_gross_glr": 1.391}, {"year": 2023, "med_net_expenses": 5045.39, "med_net_premium": 2354.2, "med_net_nlr": 2.1431, "med_gross_premium": 3138.94, "med_gross_glr": 1.6074, "dis_net_expenses": 0.0, "dis_net_premium": 1616.09, "dis_net_nlr": 0.0, "dis_gross_premium": 2154.79, "dis_gross_glr": 0.0, "comb_net_expenses": 5045.39, "comb_net_premium": 3970.3, "comb_net_nlr": 1.2708, "comb_gross_premium": 5293.73, "comb_gross_glr": 0.9531}], "M2": [{"year": 2017, "med_net_expenses": 30534.27, "med_net_premium": 51529.05, "med_net_nlr": 0.5926, "med_gross_premium": 79275.46, "med_gross_glr": 0.3852, "dis_net_expenses": 14760.65, "dis_net_premium": 41423.58, "dis_net_nlr": 0.3563, "dis_gross_premium": 63728.59, "dis_gross_glr": 0.2316, "comb_net_expenses": 45294.92, "comb_net_premium": 92952.63, "comb_net_nlr": 0.4873, "comb_gross_premium": 143004.05, "comb_gross_glr": 0.3167}, {"year": 2018, "med_net_expenses": 42944.69, "med_net_premium": 80274.24, "med_net_nlr": 0.535, "med_gross_premium": 123498.83, "med_gross_glr": 0.3477, "dis_net_expenses": 0.0, "dis_net_premium": 82334.79, "dis_net_nlr": 0.0, "dis_gross_premium": 126668.91, "dis_gross_glr": 0.0, "comb_net_expenses": 42944.69, "comb_net_premium": 162609.03, "comb_net_nlr": 0.2641, "comb_gross_premium": 250167.74, "comb_gross_glr": 0.1717}, {"year": 2019, "med_net_expenses": 134435.78, "med_net_premium": 78963.75, "med_net_nlr": 1.7025, "med_gross_premium": 121482.69, "med_gross_glr": 1.1066, "dis_net_expenses": 0.0, "dis_net_premium": 95222.15, "dis_net_nlr": 0.0, "dis_gross_premium": 146495.62, "dis_gross_glr": 0.0, "comb_net_expenses": 134435.78, "comb_net_premium": 174185.9, "comb_net_nlr": 0.7718, "comb_gross_premium": 267978.31, "comb_gross_glr": 0.5017}, {"year": 2020, "med_net_expenses": 54287.06, "med_net_premium": 96018.79, "med_net_nlr": 0.5654, "med_gross_premium": 128025.05, "med_gross_glr": 0.424, "dis_net_expenses": 109896.13, "dis_net_premium": 107711.18, "dis_net_nlr": 1.0203, "dis_gross_premium": 143614.91, "dis_gross_glr": 0.7652, "comb_net_expenses": 164183.19, "comb_net_premium": 203729.97, "comb_net_nlr": 0.8059, "comb_gross_premium": 271639.96, "comb_gross_glr": 0.6044}, {"year": 2021, "med_net_expenses": 103626.25, "med_net_premium": 107724.24, "med_net_nlr": 0.962, "med_gross_premium": 143632.32, "med_gross_glr": 0.7215, "dis_net_expenses": 11679.0, "dis_net_premium": 127568.38, "dis_net_nlr": 0.0916, "dis_gross_premium": 170091.17, "dis_gross_glr": 0.0687, "comb_net_expenses": 115305.25, "comb_net_premium": 235292.62, "comb_net_nlr": 0.4901, "comb_gross_premium": 313723.49, "comb_gross_glr": 0.3675}, {"year": 2022, "med_net_expenses": 96013.85, "med_net_premium": 120504.9, "med_net_nlr": 0.7968, "med_gross_premium": 160673.2, "med_gross_glr": 0.5976, "dis_net_expenses": 158444.97, "dis_net_premium": 139651.15, "dis_net_nlr": 1.1346, "dis_gross_premium": 186201.54, "dis_gross_glr": 0.8509, "comb_net_expenses": 254458.82, "comb_net_premium": 260156.05, "comb_net_nlr": 0.9781, "comb_gross_premium": 346874.74, "comb_gross_glr": 0.7336}, {"year": 2023, "med_net_expenses": 41577.5, "med_net_premium": 124578.94, "med_net_nlr": 0.3337, "med_gross_premium": 166105.26, "med_gross_glr": 0.2503, "dis_net_expenses": 38630.04, "dis_net_premium": 148403.31, "dis_net_nlr": 0.2603, "dis_gross_premium": 197871.08, "dis_gross_glr": 0.1952, "comb_net_expenses": 80207.54, "comb_net_premium": 272982.25, "comb_net_nlr": 0.2938, "comb_gross_premium": 363976.34, "comb_gross_glr": 0.2204}], "Pearl": [{"year": 2017, "med_net_expenses": 500.61, "med_net_premium": 12052.96, "med_net_nlr": 0.0415, "med_gross_premium": 18543.01, "med_gross_glr": 0.027, "dis_net_expenses": 0.0, "dis_net_premium": 12380.84, "dis_net_nlr": 0.0, "dis_gross_premium": 19047.45, "dis_gross_glr": 0.0, "comb_net_expenses": 500.61, "comb_net_premium": 24433.8, "comb_net_nlr": 0.0205, "comb_gross_premium": 37590.46, "comb_gross_glr": 0.0133}, {"year": 2018, "med_net_expenses": 5514.81, "med_net_premium": 16955.78, "med_net_nlr": 0.3252, "med_gross_premium": 26085.81, "med_gross_glr": 0.2114, "dis_net_expenses": 0.0, "dis_net_premium": 18437.87, "dis_net_nlr": 0.0, "dis_gross_premium": 28365.95, "dis_gross_glr": 0.0, "comb_net_expenses": 5514.81, "comb_net_premium": 35393.64, "comb_net_nlr": 0.1558, "comb_gross_premium": 54451.76, "comb_gross_glr": 0.1013}, {"year": 2019, "med_net_expenses": 28120.3, "med_net_premium": 32845.67, "med_net_nlr": 0.8561, "med_gross_premium": 50531.8, "med_gross_glr": 0.5565, "dis_net_expenses": 0.0, "dis_net_premium": 36729.34, "dis_net_nlr": 0.0, "dis_gross_premium": 56506.68, "dis_gross_glr": 0.0, "comb_net_expenses": 28120.3, "comb_net_premium": 69575.01, "comb_net_nlr": 0.4042, "comb_gross_premium": 107038.48, "comb_gross_glr": 0.2627}, {"year": 2020, "med_net_expenses": 6520.55, "med_net_premium": 16626.83, "med_net_nlr": 0.3922, "med_gross_premium": 22169.11, "med_gross_glr": 0.2941, "dis_net_expenses": 0.0, "dis_net_premium": 19785.68, "dis_net_nlr": 0.0, "dis_gross_premium": 26380.91, "dis_gross_glr": 0.0, "comb_net_expenses": 6520.55, "comb_net_premium": 36412.51, "comb_net_nlr": 0.1791, "comb_gross_premium": 48550.02, "comb_gross_glr": 0.1343}, {"year": 2021, "med_net_expenses": 14459.54, "med_net_premium": 18665.71, "med_net_nlr": 0.7747, "med_gross_premium": 24887.61, "med_gross_glr": 0.581, "dis_net_expenses": 0.0, "dis_net_premium": 23063.52, "dis_net_nlr": 0.0, "dis_gross_premium": 30751.36, "dis_gross_glr": 0.0, "comb_net_expenses": 14459.54, "comb_net_premium": 41729.23, "comb_net_nlr": 0.3465, "comb_gross_premium": 55638.97, "comb_gross_glr": 0.2599}, {"year": 2022, "med_net_expenses": 9824.97, "med_net_premium": 22304.8, "med_net_nlr": 0.4405, "med_gross_premium": 29739.73, "med_gross_glr": 0.3304, "dis_net_expenses": 0.0, "dis_net_premium": 27519.29, "dis_net_nlr": 0.0, "dis_gross_premium": 36692.39, "dis_gross_glr": 0.0, "comb_net_expenses": 9824.97, "comb_net_premium": 49824.09, "comb_net_nlr": 0.1972, "comb_gross_premium": 66432.12, "comb_gross_glr": 0.1479}, {"year": 2023, "med_net_expenses": 7296.5, "med_net_premium": 22180.21, "med_net_nlr": 0.329, "med_gross_premium": 29573.61, "med_gross_glr": 0.2467, "dis_net_expenses": 2803.2, "dis_net_premium": 28422.23, "dis_net_nlr": 0.0986, "dis_gross_premium": 37896.31, "dis_gross_glr": 0.074, "comb_net_expenses": 10099.7, "comb_net_premium": 50602.44, "comb_net_nlr": 0.1996, "comb_gross_premium": 67469.92, "comb_gross_glr": 0.1497}], "Opera": [{"year": 2020, "med_net_expenses": 0.0, "med_net_premium": 1077.54, "med_net_nlr": 0.0, "med_gross_premium": 1436.72, "med_gross_glr": 0.0, "dis_net_expenses": 0.0, "dis_net_premium": 2228.49, "dis_net_nlr": 0.0, "dis_gross_premium": 2971.32, "dis_gross_glr": 0.0, "comb_net_expenses": 0.0, "comb_net_premium": 3306.03, "comb_net_nlr": 0.0, "comb_gross_premium": 4408.04, "comb_gross_glr": 0.0}, {"year": 2021, "med_net_expenses": 718.19, "med_net_premium": 7492.89, "med_net_nlr": 0.0958, "med_gross_premium": 9990.52, "med_gross_glr": 0.0719, "dis_net_expenses": 0.0, "dis_net_premium": 13789.55, "dis_net_nlr": 0.0, "dis_gross_premium": 18386.06, "dis_gross_glr": 0.0, "comb_net_expenses": 718.19, "comb_net_premium": 21282.44, "comb_net_nlr": 0.0337, "comb_gross_premium": 28376.58, "comb_gross_glr": 0.0253}, {"year": 2022, "med_net_expenses": 9542.57, "med_net_premium": 51031.24, "med_net_nlr": 0.187, "med_gross_premium": 68041.65, "med_gross_glr": 0.1402, "dis_net_expenses": 0.0, "dis_net_premium": 61398.84, "dis_net_nlr": 0.0, "dis_gross_premium": 81865.12, "dis_gross_glr": 0.0, "comb_net_expenses": 9542.57, "comb_net_premium": 112430.08, "comb_net_nlr": 0.0849, "comb_gross_premium": 149906.77, "comb_gross_glr": 0.0637}, {"year": 2023, "med_net_expenses": 80744.37, "med_net_premium": 79886.32, "med_net_nlr": 1.0107, "med_gross_premium": 106515.09, "med_gross_glr": 0.7581, "dis_net_expenses": 170979.47, "dis_net_premium": 88835.6, "dis_net_nlr": 1.9247, "dis_gross_premium": 118447.47, "dis_gross_glr": 1.4435, "comb_net_expenses": 251723.84, "comb_net_premium": 168721.92, "comb_net_nlr": 1.4919, "comb_gross_premium": 224962.56, "comb_gross_glr": 1.119}], "Sarha": [{"year": 2019, "med_net_expenses": 1335.82, "med_net_premium": 7377.34, "med_net_nlr": 0.1811, "med_gross_premium": 11010.96, "med_gross_glr": 0.1213, "dis_net_expenses": 0.0, "dis_net_premium": 7377.23, "dis_net_nlr": 0.0, "dis_gross_premium": 11010.79, "dis_gross_glr": 0.0, "comb_net_expenses": 1335.82, "comb_net_premium": 14754.57, "comb_net_nlr": 0.0905, "comb_gross_premium": 22021.75, "comb_gross_glr": 0.0607}, {"year": 2020, "med_net_expenses": 12625.41, "med_net_premium": 41445.53, "med_net_nlr": 0.3046, "med_gross_premium": 55260.71, "med_gross_glr": 0.2285, "dis_net_expenses": 9523.66, "dis_net_premium": 38542.4, "dis_net_nlr": 0.2471, "dis_gross_premium": 51389.86, "dis_gross_glr": 0.1853, "comb_net_expenses": 22149.07, "comb_net_premium": 79987.93, "comb_net_nlr": 0.2769, "comb_gross_premium": 106650.57, "comb_gross_glr": 0.2077}, {"year": 2021, "med_net_expenses": 53996.35, "med_net_premium": 50597.82, "med_net_nlr": 1.0672, "med_gross_premium": 67463.76, "med_gross_glr": 0.8004, "dis_net_expenses": 47242.08, "dis_net_premium": 49373.45, "dis_net_nlr": 0.9568, "dis_gross_premium": 65831.27, "dis_gross_glr": 0.7176, "comb_net_expenses": 101238.43, "comb_net_premium": 99971.27, "comb_net_nlr": 1.0127, "comb_gross_premium": 133295.03, "comb_gross_glr": 0.7595}, {"year": 2022, "med_net_expenses": 64140.93, "med_net_premium": 55323.11, "med_net_nlr": 1.1594, "med_gross_premium": 73764.15, "med_gross_glr": 0.8695, "dis_net_expenses": 32550.79, "dis_net_premium": 50634.84, "dis_net_nlr": 0.6429, "dis_gross_premium": 67513.12, "dis_gross_glr": 0.4821, "comb_net_expenses": 96691.72, "comb_net_premium": 105957.95, "comb_net_nlr": 0.9125, "comb_gross_premium": 141277.27, "comb_gross_glr": 0.6844}, {"year": 2023, "med_net_expenses": 53752.0, "med_net_premium": 56786.39, "med_net_nlr": 0.9466, "med_gross_premium": 75715.19, "med_gross_glr": 0.7099, "dis_net_expenses": 0.0, "dis_net_premium": 51860.66, "dis_net_nlr": 0.0, "dis_gross_premium": 69147.54, "dis_gross_glr": 0.0, "comb_net_expenses": 53752.0, "comb_net_premium": 108647.05, "comb_net_nlr": 0.4947, "comb_gross_premium": 144862.73, "comb_gross_glr": 0.3711}]}, "annual_summary": [{"year": 2017, "incidents": 78, "expenses": 60748.22, "avg_per_incident": 778.82, "crew_count": 287}, {"year": 2018, "incidents": 151, "expenses": 190293.8, "avg_per_incident": 1260.22, "crew_count": 412}, {"year": 2019, "incidents": 126, "expenses": 227302.55, "avg_per_incident": 1803.99, "crew_count": 406}, {"year": 2020, "incidents": 97, "expenses": 265753.2, "avg_per_incident": 2739.72, "crew_count": 412}, {"year": 2021, "incidents": 169, "expenses": 261442.42, "avg_per_incident": 1547.0, "crew_count": 487}, {"year": 2022, "incidents": 278, "expenses": 413894.59, "avg_per_incident": 1488.83, "crew_count": 570}, {"year": 2023, "incidents": 225, "expenses": 249274.11, "avg_per_incident": 1107.88, "crew_count": 670}], "triangles": {"medical": [{"year": 2017, "m10": 0.2197, "m22": 0.4022, "m34": 0.4402, "m46": 0.4402}, {"year": 2018, "m10": 0.3104, "m22": 0.6835, "m34": 0.7272, "m46": 0.7289}, {"year": 2019, "m10": 0.2074, "m22": 0.5797, "m34": 0.8496, "m46": 1.0333}, {"year": 2020, "m10": 0.3857, "m22": 0.8172, "m34": 0.9099, "m46": 0.9322}, {"year": 2021, "m10": 0.178, "m22": 0.8092, "m34": 0.9028, "m46": 0.9669}, {"year": 2022, "m10": 0.2029, "m22": 1.1101, "m34": 1.2915, "m46": 1.3832}, {"year": 2023, "m10": 0.6826, "m22": 1.9979, "m34": 2.3243, "m46": 2.4893}], "disability": [{"year": 2017, "m10": 0.09, "m22": 0.3452, "m34": 0.3452, "m46": 0.3452}, {"year": 2018, "m10": 0.0, "m22": 0.2393, "m34": 0.2777, "m46": 0.2777}, {"year": 2019, "m10": 0.0, "m22": 0.1672, "m34": 0.1672, "m46": 0.1672}, {"year": 2020, "m10": 0.1335, "m22": 0.6766, "m34": 0.9041, "m46": 0.9041}, {"year": 2021, "m10": 0.2214, "m22": 0.5446, "m34": 0.5662, "m46": null}, {"year": 2022, "m10": 0.4535, "m22": 0.8942, "m34": null, "m46": null}, {"year": 2023, "m10": 0.562, "m22": null, "m34": null, "m46": null}], "combined": [{"year": 2017, "m10": 0.1584, "m22": 0.3753, "m34": 0.3953, "m46": 0.3953}, {"year": 2018, "m10": 0.1563, "m22": 0.4629, "m34": 0.504, "m46": 0.5048}, {"year": 2019, "m10": 0.0969, "m22": 0.36, "m34": 0.4861, "m46": 0.572}, {"year": 2020, "m10": 0.2561, "m22": 0.745, "m34": 0.9069, "m46": 0.9178}, {"year": 2021, "m10": 0.2007, "m22": 0.6705, "m34": 0.7264, "m46": null}, {"year": 2022, "m10": 0.3329, "m22": 1.0105, "m34": null, "m46": null}, {"year": 2023, "m10": 0.6287, "m22": null, "m34": null, "m46": null}]}, "incidents": {"medical": [{"year": 2017, "m10": 51, "m22": 78, "m34": 78, "m46": 78}, {"year": 2018, "m10": 81, "m22": 149, "m34": 150, "m46": 150}, {"year": 2019, "m10": 75, "m22": 121, "m34": 123, "m46": 125}, {"year": 2020, "m10": 40, "m22": 86, "m34": 95, "m46": 97}, {"year": 2021, "m10": 39, "m22": 158, "m34": 169, "m46": 171}, {"year": 2022, "m10": 56, "m22": 278, "m34": 289, "m46": 292}, {"year": 2023, "m10": 225, "m22": 572, "m34": 594, "m46": 599}], "disability": [{"year": 2017, "m10": 1, "m22": 4, "m34": 4, "m46": 4}, {"year": 2018, "m10": 0, "m22": 4, "m34": 4, "m46": 4}, {"year": 2019, "m10": 1, "m22": 1, "m34": 1, "m46": 1}, {"year": 2020, "m10": 1, "m22": 11, "m34": 11, "m46": 11}]}, "severity": [{"year": 2017, "claims": [1736.68, 1887.26, 2065.29, 2259.61, 2282.81, 2409.04, 2493.89, 4052.91, 6149.45, 7745.82]}, {"year": 2018, "claims": [3330.27, 3433.9, 3782.09, 4494.99, 4536.8, 4593.7, 5420.33, 12282.94, 23945.67, 44988.27]}, {"year": 2019, "claims": [3251.38, 3281.66, 3319.86, 3607.23, 3718.06, 4051.27, 4697.8, 6353.91, 11913.85, 101895.96]}, {"year": 2020, "claims": [3933.43, 4777.94, 5361.56, 5548.46, 6186.44, 6274.88, 6839.98, 24988.83, 38674.39, 75139.8]}, {"year": 2021, "claims": [5218.2, 5338.35, 6218.82, 6767.25, 6823.31, 10476.96, 11329.85, 12496.39, 13426.21, 24024.56]}, {"year": 2022, "claims": [8812.64, 9116.01, 9514.41, 9541.52, 9919.73, 10380.43, 11479.58, 17895.62, 19100.75, 35370.74]}, {"year": 2023, "claims": [3991.14, 4428.08, 4890.44, 5120.67, 6183.39, 6992.45, 7036.01, 9987.82, 10076.37, 14359.46]}]};
+
+/* =========================================================
+   STATE
+========================================================= */
+const state = {
+  basis: 'net',           // net | gross
+  cover: 'comb',          // med | dis | comb
+  yearFrom: 2017,
+  yearTo: 2023,
+  trendView: 'nlr',       // nlr | premium | claims
+  triangle: 'combined',   // medical | disability | combined
+  sortColumn: 'name',
+  sortDir: 'asc',
+};
+
+/* =========================================================
+   HELPERS
+========================================================= */
+const fmt = {
+  eur: (v) => v >= 1000000 ? (v/1000000).toFixed(2)+'M' : v >= 1000 ? (v/1000).toFixed(0)+'k' : v.toFixed(0),
+  eurFull: (v) => '€' + v.toLocaleString('en-GB', {maximumFractionDigits: 0}),
+  pct: (v) => (v*100).toFixed(1) + '%',
+  pctShort: (v) => (v*100).toFixed(0) + '%',
+};
+
+const tooltip = document.getElementById('tooltip');
+function positionTooltip(e) {
+  const x = e.clientX, y = e.clientY;
+  const rect = tooltip.getBoundingClientRect();
+  let left = x + 14, top = y + 14;
+  if (left + rect.width > window.innerWidth - 10) left = x - rect.width - 14;
+  if (top + rect.height > window.innerHeight - 10) top = y - rect.height - 14;
+  tooltip.style.left = left + 'px';
+  tooltip.style.top = top + 'px';
+}
+function showTooltip(e, html) {
+  tooltip.innerHTML = html;
+  tooltip.classList.add('show');
+  positionTooltip(e);
+}
+function hideTooltip() { tooltip.classList.remove('show'); }
+
+/* Produce a data-tt attribute string. Takes title + array of [label, value] rows.
+   Uses HTML-escaped JSON to survive attribute parsing cleanly. */
+function ttData(title, rows) {
+  const payload = JSON.stringify({ title, rows });
+  // Escape for HTML attribute (single-quoted)
+  return `data-tt='${payload.replace(/&/g, '&amp;').replace(/'/g, '&apos;').replace(/</g, '&lt;')}'`;
+}
+function renderTtPayload(payload) {
+  const rowsHtml = payload.rows.map(([l, v]) =>
+    `<div class="t-row"><span class="t-label">${l}</span><span>${v}</span></div>`
+  ).join('');
+  return `<div class="t-title">${payload.title}</div>${rowsHtml}`;
+}
+
+/* Delegated listeners — attached once at document level */
+document.addEventListener('mouseover', (e) => {
+  const el = e.target.closest('[data-tt]');
+  if (!el) return;
+  try {
+    const payload = JSON.parse(el.getAttribute('data-tt'));
+    showTooltip(e, renderTtPayload(payload));
+  } catch (err) { /* ignore */ }
+});
+document.addEventListener('mousemove', (e) => {
+  if (tooltip.classList.contains('show')) positionTooltip(e);
+});
+document.addEventListener('mouseout', (e) => {
+  const el = e.target.closest('[data-tt]');
+  if (el && !el.contains(e.relatedTarget)) hideTooltip();
+});
+
+function nlrClass(nlr) {
+  if (nlr >= 1.0) return 'bad';
+  if (nlr >= 0.75) return 'mid';
+  return 'good';
+}
+function heatColor(nlr) {
+  if (nlr === null || nlr === undefined) return null;
+  if (nlr >= 1.0) return 'var(--nlr-red-bg)';
+  if (nlr >= 0.75) return 'var(--nlr-amber-bg)';
+  if (nlr >= 0.50) return '#eaf0e2';
+  return 'var(--nlr-green-bg)';
+}
+function heatText(nlr) {
+  if (nlr >= 1.0) return 'var(--nlr-red)';
+  if (nlr >= 0.75) return 'var(--nlr-amber)';
+  return 'var(--nlr-green)';
+}
+
+function getCoverKeys() {
+  const c = state.cover;
+  const b = state.basis;
+  const base = c + '_' + b;
+  return {
+    expenses: c + '_net_expenses',  // expenses are same for net/gross
+    premium:  base + '_premium',
+    ratio:    base + (b === 'net' ? '_nlr' : '_glr'),
+  };
+}
+
+function coverLabel() {
+  return ({med: 'Medical', dis: 'Disability', comb: 'Combined medical & disability'})[state.cover];
+}
+
+/* Flatten vessels to a list of year-level rows for the current filter */
+function filteredVesselRows() {
+  const keys = getCoverKeys();
+  const rows = [];
+  Object.entries(DATA.vessels).forEach(([vessel, years]) => {
+    years.forEach(y => {
+      if (y.year < state.yearFrom || y.year > state.yearTo) return;
+      rows.push({
+        vessel,
+        year: y.year,
+        expenses: y[keys.expenses],
+        premium: y[keys.premium],
+        ratio: y[keys.ratio],
+      });
+    });
+  });
+  return rows;
+}
+
+/* =========================================================
+   KPI ROW
+========================================================= */
+function renderKPIs() {
+  const rows = filteredVesselRows();
+  const totalPrem = rows.reduce((s, r) => s + r.premium, 0);
+  const totalExp = rows.reduce((s, r) => s + r.expenses, 0);
+  const avgNLR = totalPrem > 0 ? totalExp / totalPrem : 0;
+  const activeVessels = new Set(rows.map(r => r.vessel)).size;
+
+  // Latest year specific
+  const latest = rows.filter(r => r.year === state.yearTo);
+  const latestPrem = latest.reduce((s, r) => s + r.premium, 0);
+  const latestExp = latest.reduce((s, r) => s + r.expenses, 0);
+  const latestNLR = latestPrem > 0 ? latestExp / latestPrem : 0;
+  const prior = rows.filter(r => r.year === state.yearTo - 1);
+  const priorPrem = prior.reduce((s, r) => s + r.premium, 0);
+  const priorExp = prior.reduce((s, r) => s + r.expenses, 0);
+  const priorNLR = priorPrem > 0 ? priorExp / priorPrem : 0;
+  const nlrDelta = latestNLR - priorNLR;
+
+  // Crew count from annual summary (latest year)
+  const latestSummary = DATA.annual_summary.find(a => a.year === state.yearTo) || {};
+  const priorSummary = DATA.annual_summary.find(a => a.year === state.yearTo - 1) || {};
+  const incidentDelta = latestSummary.incidents - (priorSummary.incidents || 0);
+
+  const basisLabel = state.basis === 'net' ? 'NLR' : 'GLR';
+
+  const kpis = [
+    {
+      label: 'Premium (period)',
+      value: '<span class="mono">€' + fmt.eur(totalPrem) + '</span>',
+      delta: `${state.yearFrom}–${state.yearTo} · ${state.basis}`,
+    },
+    {
+      label: 'Incurred (period)',
+      value: '<span class="mono">€' + fmt.eur(totalExp) + '</span>',
+      delta: 'Paid expenses, excl. reserves',
+    },
+    {
+      label: `${basisLabel} (period)`,
+      value: '<span class="mono">' + fmt.pctShort(avgNLR) + '</span>',
+      delta: coverLabel(),
+      deltaClass: nlrClass(avgNLR),
+    },
+    {
+      label: `${basisLabel} (${state.yearTo})`,
+      value: '<span class="mono">' + fmt.pctShort(latestNLR) + '</span>',
+      delta: (nlrDelta >= 0 ? '▲ ' : '▼ ') + Math.abs(nlrDelta*100).toFixed(1) + 'pp vs ' + (state.yearTo-1),
+      deltaClass: nlrDelta >= 0 ? 'up' : 'down',
+    },
+    {
+      label: `Crew (${state.yearTo})`,
+      value: '<span class="mono">' + (latestSummary.crew_count || '—') + '</span>',
+      delta: (latestSummary.incidents || '—') + ' incidents · ' + (incidentDelta >= 0 ? '+' : '') + incidentDelta + ' YoY',
+    },
+  ];
+
+  document.getElementById('kpiRow').innerHTML = kpis.map(k => `
+    <div class="kpi">
+      <div class="kpi-label">${k.label}</div>
+      <div class="kpi-value">${k.value}</div>
+      <div class="kpi-delta ${k.deltaClass === 'bad' || k.deltaClass === 'up' ? 'up' : k.deltaClass === 'good' || k.deltaClass === 'down' ? 'down' : ''}">${k.delta}</div>
+    </div>
+  `).join('');
+}
+
+/* =========================================================
+   TREND CHART
+========================================================= */
+function renderTrend() {
+  const keys = getCoverKeys();
+  const basisLabel = state.basis === 'net' ? 'Net' : 'Gross';
+  document.getElementById('trendSub').textContent = `${coverLabel()}, ${basisLabel.toLowerCase()}${state.trendView === 'nlr' ? ' — loss ratio' : state.trendView === 'premium' ? ' — premium earned' : ' — incurred expenses'}`;
+
+  // Aggregate by year
+  const years = [];
+  for (let y = state.yearFrom; y <= state.yearTo; y++) years.push(y);
+  const series = years.map(y => {
+    let totalExp = 0, totalPrem = 0;
+    Object.values(DATA.vessels).forEach(vs => {
+      const row = vs.find(r => r.year === y);
+      if (row) { totalExp += row[keys.expenses]; totalPrem += row[keys.premium]; }
+    });
+    return { year: y, expenses: totalExp, premium: totalPrem, ratio: totalPrem > 0 ? totalExp / totalPrem : 0 };
+  });
+
+  const valueKey = state.trendView === 'premium' ? 'premium' : state.trendView === 'claims' ? 'expenses' : 'ratio';
+  const values = series.map(s => s[valueKey]);
+  const maxVal = Math.max(...values, state.trendView === 'nlr' ? 1.2 : 0) * 1.15;
+  const minVal = 0;
+
+  const W = 500, H = 280;
+  const padL = 46, padR = 14, padT = 20, padB = 32;
+  const chartW = W - padL - padR;
+  const chartH = H - padT - padB;
+  const n = series.length;
+  const barW = chartW / n * 0.55;
+  const groupW = chartW / n;
+
+  const yVal = v => padT + chartH - (v - minVal) / (maxVal - minVal) * chartH;
+
+  // Y ticks
+  const yTicks = state.trendView === 'nlr'
+    ? [0, 0.25, 0.5, 0.75, 1.0, 1.25].filter(t => t <= maxVal)
+    : [0, maxVal*0.25, maxVal*0.5, maxVal*0.75, maxVal].map(v => Math.round(v));
+
+  const fmtY = state.trendView === 'nlr' ? fmt.pctShort : v => '€' + fmt.eur(v);
+
+  let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%; height:auto;">`;
+
+  // Grid
+  yTicks.forEach(t => {
+    svg += `<line class="grid-line" x1="${padL}" x2="${W-padR}" y1="${yVal(t)}" y2="${yVal(t)}" />`;
+    svg += `<text class="axis-label" x="${padL-6}" y="${yVal(t)+3}" text-anchor="end">${fmtY(t)}</text>`;
+  });
+
+  // 100% threshold
+  if (state.trendView === 'nlr' && maxVal > 1.0) {
+    svg += `<line class="threshold" x1="${padL}" x2="${W-padR}" y1="${yVal(1.0)}" y2="${yVal(1.0)}" />`;
+    svg += `<text class="threshold-label" x="${W-padR-4}" y="${yVal(1.0)-4}" text-anchor="end">Break-even</text>`;
+  }
+
+  // Bars
+  series.forEach((s, i) => {
+    const cx = padL + groupW * i + groupW/2;
+    const barX = cx - barW/2;
+    const v = s[valueKey];
+    const barY = yVal(v);
+    const barH = padT + chartH - barY;
+    const nlr = s.ratio;
+    const color = state.trendView === 'nlr'
+      ? (nlr >= 1.0 ? 'var(--nlr-red)' : nlr >= 0.75 ? 'var(--nlr-amber)' : 'var(--nlr-green)')
+      : 'var(--accent)';
+    const tt = ttData(`Policy year ${s.year}`, [
+      ['Premium', fmt.eurFull(s.premium)],
+      ['Incurred', fmt.eurFull(s.expenses)],
+      [`${basisLabel} loss ratio`, fmt.pct(s.ratio)]
+    ]);
+    svg += `<rect class="bar" x="${barX}" y="${barY}" width="${barW}" height="${barH}" fill="${color}" ${tt} />`;
+    svg += `<text class="axis-label" x="${cx}" y="${H-padB+16}" text-anchor="middle">${s.year}</text>`;
+    if (state.trendView === 'nlr') {
+      svg += `<text x="${cx}" y="${barY - 6}" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="${color}" font-weight="500">${fmt.pctShort(v)}</text>`;
+    }
+  });
+
+  svg += `</svg>`;
+  document.getElementById('trendChart').innerHTML = svg;
+}
+
+/* =========================================================
+   SHARE CHART (horizontal bars — loss share by vessel, latest year)
+========================================================= */
+function renderShare() {
+  const keys = getCoverKeys();
+  const year = state.yearTo;
+  const items = [];
+  Object.entries(DATA.vessels).forEach(([v, vs]) => {
+    const row = vs.find(r => r.year === year);
+    if (row && row[keys.expenses] > 0) {
+      items.push({ vessel: v, expenses: row[keys.expenses], premium: row[keys.premium], ratio: row[keys.ratio] });
+    }
+  });
+  items.sort((a,b) => b.expenses - a.expenses);
+  const total = items.reduce((s,i) => s+i.expenses, 0);
+
+  const W = 400, rowH = 26;
+  const H = items.length * rowH + 30;
+  const padL = 80, padR = 80, padT = 10;
+  const maxVal = Math.max(...items.map(i=>i.expenses));
+  const barMax = W - padL - padR;
+
+  let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%; height:auto;">`;
+  svg += `<text class="axis-label" x="${padL}" y="${padT+4}" text-transform="uppercase" letter-spacing="0.06em" font-size="9">Vessel</text>`;
+  svg += `<text class="axis-label" x="${W-padR+4}" y="${padT+4}" text-transform="uppercase" letter-spacing="0.06em" font-size="9">Share</text>`;
+
+  items.forEach((it, i) => {
+    const y = padT + 14 + i*rowH;
+    const bw = (it.expenses / maxVal) * barMax;
+    const color = it.ratio >= 1.0 ? 'var(--nlr-red)' : it.ratio >= 0.75 ? 'var(--nlr-amber)' : 'var(--accent)';
+    const tt = ttData(`${it.vessel} · ${year}`, [
+      ['Incurred', fmt.eurFull(it.expenses)],
+      ['Premium', fmt.eurFull(it.premium)],
+      ['Share of total', (it.expenses/total*100).toFixed(1) + '%'],
+      ['LR', fmt.pct(it.ratio)]
+    ]);
+    svg += `<text x="${padL-6}" y="${y+4}" text-anchor="end" font-family="Fraunces, serif" font-size="12" fill="var(--ink)">${it.vessel}</text>`;
+    svg += `<rect class="bar" x="${padL}" y="${y-8}" width="${bw}" height="14" fill="${color}" ${tt} onclick="openDrawer('${it.vessel}')" />`;
+    svg += `<text x="${W-padR+6}" y="${y+4}" font-family="JetBrains Mono, monospace" font-size="10" fill="var(--muted)">${(it.expenses/total*100).toFixed(1)}%</text>`;
+  });
+
+  svg += `</svg>`;
+  document.getElementById('shareChart').innerHTML = svg;
+}
+
+/* =========================================================
+   VESSEL TABLE (with NLR heatmap cells)
+========================================================= */
+function renderVesselTable() {
+  const keys = getCoverKeys();
+  const basisLabel = state.basis === 'net' ? 'Net' : 'Gross';
+  document.getElementById('tableSub').textContent =
+    `${basisLabel} loss ratio by policy year · ${coverLabel().toLowerCase()} · EUR`;
+
+  const years = [];
+  for (let y = state.yearFrom; y <= state.yearTo; y++) years.push(y);
+
+  const rows = Object.entries(DATA.vessels).map(([vessel, vs]) => {
+    const yearVals = {};
+    let totalExp = 0, totalPrem = 0;
+    years.forEach(y => {
+      const r = vs.find(x => x.year === y);
+      if (r) {
+        yearVals[y] = r[keys.ratio];
+        totalExp += r[keys.expenses];
+        totalPrem += r[keys.premium];
+      } else {
+        yearVals[y] = null;
+      }
+    });
+    const total = totalPrem > 0 ? totalExp / totalPrem : null;
+    return { vessel, yearVals, total, totalPrem, totalExp };
+  });
+
+  // Sort
+  rows.sort((a, b) => {
+    let av, bv;
+    if (state.sortColumn === 'name') { av = a.vessel; bv = b.vessel; }
+    else if (state.sortColumn === 'total') { av = a.total || -1; bv = b.total || -1; }
+    else if (state.sortColumn === 'premium') { av = a.totalPrem; bv = b.totalPrem; }
+    else { av = a.yearVals[state.sortColumn] ?? -1; bv = b.yearVals[state.sortColumn] ?? -1; }
+    const cmp = typeof av === 'string' ? av.localeCompare(bv) : av - bv;
+    return state.sortDir === 'asc' ? cmp : -cmp;
+  });
+
+  const arrow = c => state.sortColumn === c
+    ? (state.sortDir === 'asc' ? '▲' : '▼')
+    : '▲';
+
+  let html = `<thead><tr>
+    <th onclick="sortBy('name')" class="${state.sortColumn==='name'?'sorted':''}">Vessel <span class="sort-arrow">${arrow('name')}</span></th>`;
+  years.forEach(y => {
+    html += `<th onclick="sortBy(${y})" style="text-align: center;" class="${state.sortColumn===y?'sorted':''}">${y} <span class="sort-arrow">${arrow(y)}</span></th>`;
+  });
+  html += `<th onclick="sortBy('total')" style="text-align: center;" class="${state.sortColumn==='total'?'sorted':''}">Period <span class="sort-arrow">${arrow('total')}</span></th>`;
+  html += `<th onclick="sortBy('premium')" style="text-align: right;" class="${state.sortColumn==='premium'?'sorted':''}">Premium <span class="sort-arrow">${arrow('premium')}</span></th>
+  </tr></thead><tbody>`;
+
+  rows.forEach(r => {
+    html += `<tr onclick="openDrawer('${r.vessel}')">`;
+    html += `<td><div class="vessel-name">${r.vessel}</div></td>`;
+    years.forEach(y => {
+      const v = r.yearVals[y];
+      if (v === null || v === undefined) {
+        html += `<td class="heat-cell empty"><span>—</span></td>`;
+      } else {
+        const col = heatColor(v);
+        const tc = heatText(v);
+        html += `<td class="heat-cell" style="--heat-color: ${col}; color: ${tc};"><span>${fmt.pctShort(v)}</span></td>`;
+      }
+    });
+    if (r.total === null) {
+      html += `<td class="heat-cell empty"><span>—</span></td>`;
+    } else {
+      html += `<td class="heat-cell" style="--heat-color: ${heatColor(r.total)}; color: ${heatText(r.total)}; font-weight: 600;"><span>${fmt.pctShort(r.total)}</span></td>`;
+    }
+    html += `<td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: var(--muted);">€${fmt.eur(r.totalPrem)}</td>`;
+    html += `</tr>`;
+  });
+
+  // Fleet total row
+  let fleetExp = 0, fleetPrem = 0;
+  const yearTotals = {};
+  years.forEach(y => {
+    let e=0, p=0;
+    rows.forEach(r => {
+      const vs = DATA.vessels[r.vessel];
+      const row = vs.find(x=>x.year === y);
+      if (row) { e += row[keys.expenses]; p += row[keys.premium]; }
+    });
+    yearTotals[y] = p > 0 ? e/p : null;
+    fleetExp += e; fleetPrem += p;
+  });
+  const fleetRatio = fleetPrem > 0 ? fleetExp / fleetPrem : null;
+  html += `<tr style="background: var(--bg-alt); font-weight: 600; border-top: 2px solid var(--border-strong);"><td><div class="vessel-name">Fleet total</div></td>`;
+  years.forEach(y => {
+    const v = yearTotals[y];
+    if (v === null) {
+      html += `<td class="heat-cell empty"><span>—</span></td>`;
+    } else {
+      html += `<td class="heat-cell" style="--heat-color: ${heatColor(v)}; color: ${heatText(v)};"><span>${fmt.pctShort(v)}</span></td>`;
+    }
+  });
+  html += `<td class="heat-cell" style="--heat-color: ${heatColor(fleetRatio)}; color: ${heatText(fleetRatio)}; font-weight: 700;"><span>${fmt.pctShort(fleetRatio)}</span></td>`;
+  html += `<td style="text-align: right; font-family: 'JetBrains Mono', monospace;">€${fmt.eur(fleetPrem)}</td>`;
+  html += `</tr>`;
+
+  html += `</tbody>`;
+  document.getElementById('vesselTable').innerHTML = html;
+}
+
+function sortBy(col) {
+  if (state.sortColumn === col) {
+    state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc';
+  } else {
+    state.sortColumn = col;
+    state.sortDir = typeof col === 'number' || col === 'total' || col === 'premium' ? 'desc' : 'asc';
+  }
+  renderVesselTable();
+}
+
+/* =========================================================
+   NLR TRIANGLE
+========================================================= */
+function renderTriangle() {
+  const data = DATA.triangles[state.triangle];
+  const devLabels = ['10 mo', '22 mo', '34 mo', '46 mo'];
+  const keys = ['m10', 'm22', 'm34', 'm46'];
+
+  let html = `<div class="triangle-grid">
+    <div class="tg-head">Policy year</div>`;
+  devLabels.forEach(l => html += `<div class="tg-head">${l}</div>`);
+
+  data.forEach(row => {
+    html += `<div class="tg-year">${row.year}</div>`;
+    keys.forEach(k => {
+      const v = row[k];
+      if (v === null || v === undefined) {
+        html += `<div class="tg-cell empty">—</div>`;
+      } else {
+        const col = heatColor(v);
+        const tc = heatText(v);
+        html += `<div class="tg-cell" style="background: ${col}; color: ${tc};">${fmt.pctShort(v)}</div>`;
+      }
+    });
+  });
+  html += `</div>`;
+  html += `<div style="margin-top: 14px; font-size: 11px; color: var(--muted); line-height: 1.5;">
+    <strong style="color: var(--ink-2);">Reading the triangle:</strong> Move right to see how a policy year's loss ratio develops as more months pass. Move down for successive underwriting years. Blank cells indicate insufficient development time at snapshot date.
+  </div>`;
+  document.getElementById('triangleChart').innerHTML = html;
+}
+
+/* =========================================================
+   SEVERITY CHART — stacked bars, top 10 claims per year
+========================================================= */
+function renderSeverity() {
+  const data = DATA.severity;
+  const allMax = Math.max(...data.flatMap(d => d.claims));
+
+  let html = '';
+  data.forEach(row => {
+    const total = row.claims.reduce((s,c) => s+c, 0);
+    // find largest bar to scale relative
+    let segHtml = '';
+    const maxBarWidth = 100;  // %
+    const rowMax = Math.max(...row.claims);
+    row.claims.slice().reverse().forEach((c, i) => {
+      const widthPct = (c / allMax) * 100;
+      const shade = `rgba(10, 61, 79, ${0.3 + (i/9)*0.6})`;
+      const tt = ttData(`Claim ${10-i} of top 10 · ${row.year}`, [
+        ['Value', fmt.eurFull(c)]
+      ]);
+      segHtml += `<div class="sev-seg" style="width: ${widthPct*0.6}%; background: ${shade};" ${tt}></div>`;
+    });
+
+    html += `
+      <div class="severity-year">
+        <div class="y-label">${row.year}</div>
+        <div class="severity-bars">${segHtml}</div>
+        <div class="y-total">€${fmt.eur(total)}</div>
+      </div>
+    `;
+  });
+  html += `<div style="margin-top: 14px; font-size: 11px; color: var(--muted); line-height: 1.5;">
+    Each bar segment is one of the top 10 individual claims for that year, smallest-to-largest left-to-right. Larger tails in 2019 and 2020 reflect catastrophic claims.
+  </div>`;
+  document.getElementById('severityChart').innerHTML = html;
+}
+
+/* =========================================================
+   INCIDENT CHART (grouped bars — 10mo vs now)
+========================================================= */
+function renderIncidents() {
+  // Use annual summary to compute claims per 100 crew at latest position
+  const data = DATA.annual_summary.filter(a => a.year >= state.yearFrom && a.year <= state.yearTo);
+  const medIncs = DATA.incidents.medical;
+
+  const W = 900, H = 320;
+  const padL = 50, padR = 20, padT = 20, padB = 40;
+  const chartW = W - padL - padR, chartH = H - padT - padB;
+
+  const rows = data.map(a => {
+    const medRow = medIncs.find(m => m.year === a.year) || {};
+    const crew = a.crew_count;
+    return {
+      year: a.year,
+      crew,
+      m10: medRow.m10 != null ? (medRow.m10 / crew * 100) : null,
+      now: crew ? (a.incidents / crew * 100) : null,
+      incidentsNow: a.incidents,
+      incidents10: medRow.m10,
+    };
+  });
+
+  const maxV = Math.max(...rows.flatMap(r => [r.m10 || 0, r.now || 0])) * 1.15;
+  const n = rows.length;
+  const groupW = chartW / n;
+  const barW = groupW * 0.3;
+
+  const yVal = v => padT + chartH - (v/maxV) * chartH;
+
+  let svg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%; height:auto;">`;
+
+  // Grid
+  [0, 10, 20, 30, 40, 50].filter(t => t <= maxV).forEach(t => {
+    svg += `<line class="grid-line" x1="${padL}" x2="${W-padR}" y1="${yVal(t)}" y2="${yVal(t)}" />`;
+    svg += `<text class="axis-label" x="${padL-6}" y="${yVal(t)+3}" text-anchor="end">${t}</text>`;
+  });
+
+  rows.forEach((r, i) => {
+    const cx = padL + groupW * i + groupW/2;
+
+    if (r.m10 != null) {
+      const bx = cx - barW - 2;
+      const by = yVal(r.m10);
+      const bh = padT + chartH - by;
+      const tt = ttData(`${r.year} — 10 months`, [
+        ['Incidents', r.incidents10],
+        ['Crew', r.crew],
+        ['Per 100 crew', r.m10.toFixed(2)]
+      ]);
+      svg += `<rect class="bar" x="${bx}" y="${by}" width="${barW}" height="${bh}" fill="var(--chart-2)" ${tt} />`;
+    }
+
+    if (r.now != null) {
+      const bx = cx + 2;
+      const by = yVal(r.now);
+      const bh = padT + chartH - by;
+      const tt = ttData(`${r.year} — current`, [
+        ['Incidents', r.incidentsNow],
+        ['Crew', r.crew],
+        ['Per 100 crew', r.now.toFixed(2)]
+      ]);
+      svg += `<rect class="bar" x="${bx}" y="${by}" width="${barW}" height="${bh}" fill="var(--chart-1)" ${tt} />`;
+    }
+
+    svg += `<text class="axis-label" x="${cx}" y="${H-padB+16}" text-anchor="middle">${r.year}</text>`;
+  });
+
+  // Legend
+  svg += `<g transform="translate(${padL}, ${H-10})">
+    <rect x="0" y="-8" width="10" height="10" fill="var(--chart-2)" />
+    <text x="14" y="1" class="axis-label">10 months developed</text>
+    <rect x="160" y="-8" width="10" height="10" fill="var(--chart-1)" />
+    <text x="174" y="1" class="axis-label">Current (fully developed)</text>
+    <text x="350" y="1" class="axis-label">Y-axis: claims per 100 crew</text>
+  </g>`;
+
+  svg += `</svg>`;
+  document.getElementById('incidentChart').innerHTML = svg;
+}
+
+/* =========================================================
+   DRAWER — vessel detail
+========================================================= */
+function openDrawer(vessel) {
+  const years = DATA.vessels[vessel];
+  const keys = getCoverKeys();
+
+  document.getElementById('drawerTitle').textContent = vessel;
+  document.getElementById('drawerSub').textContent = `${years.length} policy years · ${years[0].year}–${years[years.length-1].year} · ${coverLabel()}`;
+
+  const totalExp = years.reduce((s,y) => s + y[keys.expenses], 0);
+  const totalPrem = years.reduce((s,y) => s + y[keys.premium], 0);
+  const ratio = totalPrem > 0 ? totalExp/totalPrem : 0;
+
+  // Mini stats
+  let html = `
+    <div class="mini-stats">
+      <div class="mini-stat"><div class="l">Total premium</div><div class="v mono">€${fmt.eur(totalPrem)}</div></div>
+      <div class="mini-stat"><div class="l">Total incurred</div><div class="v mono">€${fmt.eur(totalExp)}</div></div>
+      <div class="mini-stat"><div class="l">Period ${state.basis === 'net' ? 'NLR' : 'GLR'}</div><div class="v mono" style="color: ${ratio >= 1 ? 'var(--nlr-red)' : ratio >= 0.75 ? 'var(--nlr-amber)' : 'var(--nlr-green)'}">${fmt.pctShort(ratio)}</div></div>
+    </div>
+  `;
+
+  // Year-by-year breakdown
+  html += `<div class="card-title" style="font-size: 14px; margin-bottom: 12px;">By policy year</div>`;
+  html += `<table class="vessel-table">
+    <thead><tr>
+      <th>Year</th>
+      <th style="text-align: right;">Premium</th>
+      <th style="text-align: right;">Incurred</th>
+      <th style="text-align: right;">LR</th>
+      <th style="text-align: right;">Medical LR</th>
+      <th style="text-align: right;">Disability LR</th>
+    </tr></thead><tbody>`;
+
+  years.forEach(y => {
+    const mRatioKey = 'med_' + state.basis + (state.basis === 'net' ? '_nlr' : '_glr');
+    const dRatioKey = 'dis_' + state.basis + (state.basis === 'net' ? '_nlr' : '_glr');
+    html += `<tr>
+      <td><span class="mono">${y.year}</span></td>
+      <td style="text-align: right;" class="mono">€${fmt.eur(y[keys.premium])}</td>
+      <td style="text-align: right;" class="mono">€${fmt.eur(y[keys.expenses])}</td>
+      <td style="text-align: right;"><span class="nlr-chip ${nlrClass(y[keys.ratio])}">${fmt.pctShort(y[keys.ratio])}</span></td>
+      <td style="text-align: right;" class="mono" style="color: var(--muted);">${fmt.pctShort(y[mRatioKey])}</td>
+      <td style="text-align: right;" class="mono" style="color: var(--muted);">${fmt.pctShort(y[dRatioKey])}</td>
+    </tr>`;
+  });
+  html += `</tbody></table>`;
+
+  // Sparkline of NLR over time
+  const W = 580, H = 120, pL = 20, pR = 10, pT = 10, pB = 20;
+  const cW = W - pL - pR, cH = H - pT - pB;
+  const n = years.length;
+  const maxR = Math.max(...years.map(y => y[keys.ratio]), 1.0);
+  const xV = i => pL + (i/(n-1 || 1)) * cW;
+  const yV = v => pT + cH - (v/maxR) * cH;
+
+  let sparkSvg = `<svg viewBox="0 0 ${W} ${H}" style="width:100%;">`;
+  sparkSvg += `<line class="grid-line" x1="${pL}" x2="${W-pR}" y1="${yV(1.0)}" y2="${yV(1.0)}" stroke-dasharray="3,3" stroke="var(--nlr-red)" />`;
+  sparkSvg += `<text x="${W-pR}" y="${yV(1.0)-3}" text-anchor="end" class="axis-label" fill="var(--nlr-red)">100%</text>`;
+
+  // Area
+  let path = `M${xV(0)},${yV(years[0][keys.ratio])}`;
+  for (let i = 1; i < n; i++) path += ` L${xV(i)},${yV(years[i][keys.ratio])}`;
+  let area = path + ` L${xV(n-1)},${pT+cH} L${xV(0)},${pT+cH} Z`;
+  sparkSvg += `<path d="${area}" fill="var(--accent)" opacity="0.15" />`;
+  sparkSvg += `<path d="${path}" fill="none" stroke="var(--accent)" stroke-width="1.5" />`;
+
+  years.forEach((y, i) => {
+    const color = y[keys.ratio] >= 1.0 ? 'var(--nlr-red)' : y[keys.ratio] >= 0.75 ? 'var(--nlr-amber)' : 'var(--nlr-green)';
+    sparkSvg += `<circle cx="${xV(i)}" cy="${yV(y[keys.ratio])}" r="4" fill="${color}" stroke="#fff" stroke-width="1.5" />`;
+    sparkSvg += `<text x="${xV(i)}" y="${H-4}" text-anchor="middle" class="axis-label">${y.year}</text>`;
+  });
+  sparkSvg += `</svg>`;
+
+  html += `<div class="card-title" style="font-size: 14px; margin: 24px 0 8px;">Loss ratio trajectory</div>`;
+  html += sparkSvg;
+
+  document.getElementById('drawerBody').innerHTML = html;
+  document.getElementById('drawer').classList.add('show');
+  document.getElementById('drawerOverlay').classList.add('show');
+}
+
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('show');
+  document.getElementById('drawerOverlay').classList.remove('show');
+}
+document.getElementById('drawerOverlay').addEventListener('click', closeDrawer);
+
+/* =========================================================
+   EVENT HANDLERS
+========================================================= */
+document.getElementById('basisToggle').addEventListener('click', e => {
+  if (!e.target.matches('.pill')) return;
+  document.querySelectorAll('#basisToggle .pill').forEach(p => p.classList.remove('active'));
+  e.target.classList.add('active');
+  state.basis = e.target.dataset.basis;
+  renderAll();
+});
+
+document.getElementById('coverToggle').addEventListener('click', e => {
+  if (!e.target.matches('.pill')) return;
+  document.querySelectorAll('#coverToggle .pill').forEach(p => p.classList.remove('active'));
+  e.target.classList.add('active');
+  state.cover = e.target.dataset.cover;
+  renderAll();
+});
+
+document.getElementById('yearFrom').addEventListener('change', e => {
+  state.yearFrom = parseInt(e.target.value);
+  renderAll();
+});
+document.getElementById('yearTo').addEventListener('change', e => {
+  state.yearTo = parseInt(e.target.value);
+  renderAll();
+});
+
+document.querySelectorAll('.mini-pill[data-view]').forEach(b => {
+  b.addEventListener('click', e => {
+    document.querySelectorAll('.mini-pill[data-view]').forEach(x => x.classList.remove('active'));
+    e.target.classList.add('active');
+    state.trendView = e.target.dataset.view;
+    renderTrend();
+  });
+});
+
+document.querySelectorAll('#triangleToggle .mini-pill').forEach(b => {
+  b.addEventListener('click', e => {
+    document.querySelectorAll('#triangleToggle .mini-pill').forEach(x => x.classList.remove('active'));
+    e.target.classList.add('active');
+    state.triangle = e.target.dataset.tri;
+    renderTriangle();
+  });
+});
+
+/* =========================================================
+   INIT
+========================================================= */
+function renderAll() {
+  renderKPIs();
+  renderTrend();
+  renderShare();
+  renderVesselTable();
+  renderTriangle();
+  renderSeverity();
+  renderIncidents();
+}
+renderAll();
+</script>
+</body>
+</html>
